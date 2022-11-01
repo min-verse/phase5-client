@@ -3,5 +3,13 @@ module.exports = {
   plugins: [require('daisyui')],
   daisyui: {
     themes: ["light"]
+  },
+  theme:{
+    extend:{},
+  },
+  variants:{
+    extend:{
+      animation:['animate-spin']
+    }
   }
 }

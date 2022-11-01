@@ -8,7 +8,6 @@ function HomeContent() {
 
     const toggleVisible = () => {
         setVisible(!visible)
-
     };
 
     return (

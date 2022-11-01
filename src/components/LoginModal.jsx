@@ -1,30 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router';
+import LoginForm from './LoginForm';
 import { Modal, Button } from 'react-daisyui';
 
-function LoginModal() {
+function LoginModal({ open, toggle }){
+
+    const [errors, setErrors] = useState('');
+
+    function toggleErrors(content){
+        setErrors(content);
+    }
 
     return (
-        <div className="font-sans">
-            <Button onClick={toggleVisible}>Open Modal</Button>
-            <Modal open={visible}>
-                <Button
-                    size="sm"
-                    shape="circle"
-                    className="absolute right-2 top-2"
-                    onClick={toggleVisible}
-                >
-                    ✕
-                </Button>
-                <Modal.Header className="font-bold">
-                    Congratulations random Interner user!
-                </Modal.Header>
+        <Modal open={open}>
+            <Button
+                size="sm"
+                shape="circle"
+                className="absolute right-2 top-2"
+                onClick={toggle}
+            >
+                ✕
+            </Button>
+            <Modal.Header className="font-bold">
+                Jump right back into the pages! &#128214;
+            </Modal.Header>
 
-                <Modal.Body>
-                    You've been selected for a chance to get one year of subscription to
-                    use Wikipedia for free!
-                </Modal.Body>
-            </Modal>
-        </div>
+            <Modal.Body>
+                Your books are waiting for you. Let's get reading! &#128522;
+                {errors && errors.length && errors.length > 0 ? 
+                                    <p className="py-4" style={{color:"red"}}>{errors}</p>
+                                :
+                                null}
+                <LoginForm handleError={toggleErrors}/>
+            </Modal.Body>
+        </Modal>
     );
 }
 

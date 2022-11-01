@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router';
 import SignupForm from './SignupForm';
 import { Modal, Button } from 'react-daisyui';
 
-function SignupModal({ open, toggle }){
+function SignupModal({ open, toggle }) {
+
+    const [errors, setErrors] = useState('');
+
+    function toggleErrors(content){
+        setErrors(content);
+    }
 
     return (
         <Modal open={open}>
@@ -16,13 +22,15 @@ function SignupModal({ open, toggle }){
                 ✕
             </Button>
             <Modal.Header className="font-bold">
-                Congratulations random Interner user!
+                &#128218; Start your reading journey with us today!
             </Modal.Header>
-
             <Modal.Body>
-                You've been selected for a chance to get one year of subscription to
-                use Wikipedia for free!
-                <SignupForm />
+                Join BOOCO and enter a community full of fellow readers with a wide range of books to choose from.
+                {errors && errors.length && errors.length > 0 ? 
+                                    <p className="py-4" style={{color:"red"}}>{errors}</p>
+                                :
+                                null}
+                <SignupForm handleError={toggleErrors}/>
             </Modal.Body>
         </Modal>
     );

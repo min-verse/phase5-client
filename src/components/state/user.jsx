@@ -4,10 +4,10 @@ export const userSlice = createSlice({
     initialState: {
         profile: {},
         isAuthenticated: false,
-        stocks:[],
-        following:[],
-        priceHistory:{},
-        doughnutData:{}
+        books:[],
+        posts:[],
+        comments:[],
+        friends:[]
     },
     reducers: {
         setUser: (state, action) => {
@@ -17,27 +17,19 @@ export const userSlice = createSlice({
         clearUser: (state) => {
             state.profile = {};
             state.isAuthenticated = false;
-            state.stocks=[];
-            state.priceHistory={};
-            state.doughnutData={};
+            state.books=[];
+            state.posts=[];
+            state.comments=[];
         },
-        setStocks: (state, action) =>{
-            state.stocks = [...action.payload];
+        setBooks: (state, action) =>{
+            state.books = [...action.payload];
         },
-        setFollowing: (state, action) =>{
-            state.following = [...action.payload];
+        setFriends: (state, action) =>{
+            state.friends = [...action.payload];
         },
-        setPriceHistory: (state, action) =>{
-            state.priceHistory = {...action.payload};
+        setPosts: (state, action) =>{
+            state.posts = [...action.payload];
         },
-        setDoughnutData: (state, action) =>{
-            state.doughnutData = {...action.payload};
-        },
-        clearStocksData: (state) =>{
-            state.stocks=[];
-            state.priceHistory={};
-            state.doughnutData={};
-        }
     },
 });
 

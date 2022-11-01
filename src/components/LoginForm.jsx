@@ -1,26 +1,10 @@
 import React, { useState } from 'react';
 
-function SignupForm({handleError}) {
+function LoginForm({ handleError }) {
 
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState('');
-
-    function handleExampleClick() {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 3000);
-    }
-
-    function handleUsernameChange(e) {
-        const newUsername = e.target.value;
-        console.log(username);
-        setUsername(newUsername);
-    }
 
     function handleEmailChange(e) {
         const newEmail = e.target.value;
@@ -34,42 +18,42 @@ function SignupForm({handleError}) {
         setPassword(newPassword);
     }
 
-    function handleConfirmPasswordChange(e) {
-        const newConfirmPassword = e.target.value;
-        console.log(newConfirmPassword);
-        setConfirmPassword(newConfirmPassword);
-    }
-
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
-        if(password!==confirmPassword){
-            setLoading(false);
-            handleError("Passwords do not match. Unable to register new reader.");
-        }else{
-            await fetch("http://localhost:5000/signup", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
+        await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user: {
+                    email: email,
+                    password: password,
                 },
-                body: JSON.stringify({
-                    user: {
-                        username: username,
-                        email: email,
-                        password: password,
-                    },
-                }),
+            }),
+        })
+            .then((res) => {
+                if (res.ok) {
+                    console.log(res.headers.get("Authorization"));
+                    localStorage.setItem("token", res.headers.get("Authorization"));
+                    return res.json();
+                } else {
+                    return res.text().then((text) => Promise.reject(text));
+                }
             })
-                .then(res => res.json())
-                .then((data) => {
-                    setLoading(false);
-                    if(!data['status']['code']){
-                        handleError(data['status']['message']);
-                    }else{
-                        console.dir(data);
-                    }
-                });
-        }
+            .then((data) => {
+                setLoading(false);
+                if (data['status']['code'] === 200) {
+
+                } else {
+                    handleError(data);
+                }
+            }).catch((err) => {
+                setLoading(false);
+                console.log(typeof err);
+                handleError(err);
+            });
     }
 
     return (
@@ -80,20 +64,6 @@ function SignupForm({handleError}) {
                         <div className="overflow-hidden shadow sm:rounded-md">
                             <div className="bg-white px-4 py-5 sm:p-6">
                                 <div className="grid grid-cols-6 gap-6">
-                                    
-                                    <div className="col-span-6">
-                                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                                            Username
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="username"
-                                            onChange={handleUsernameChange}
-                                            value={username}
-                                            autoComplete="username"
-                                            className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        />
-                                    </div>
 
                                     <div className="col-span-6">
                                         <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
@@ -102,9 +72,9 @@ function SignupForm({handleError}) {
                                         <input
                                             type="text"
                                             name="email-address"
+                                            autoComplete="email"
                                             value={email}
                                             onChange={handleEmailChange}
-                                            autoComplete="email"
                                             className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                     </div>
@@ -116,33 +86,18 @@ function SignupForm({handleError}) {
                                         <input
                                             type="password"
                                             name="password"
+                                            autoComplete="password"
                                             value={password}
                                             onChange={handlePasswordChange}
-                                            autoComplete="password"
                                             className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
                                     </div>
-
-                                    <div className="col-span-6">
-                                        <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700">
-                                            Confirm Password
-                                        </label>
-                                        <input
-                                            type="password"
-                                            name="confirm-password"
-                                            onChange={handleConfirmPasswordChange}
-                                            value={confirmPassword}
-                                            autoComplete="password"
-                                            className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        />
-                                    </div>
-
                                 </div>
                             </div>
                             <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                                 {loading ?
                                     <button
-
+                                        type="submit"
                                         className="inline-flex justify-center rounded-md border border-transparent bg-gray-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                         disabled>
                                         Loading...
@@ -152,11 +107,9 @@ function SignupForm({handleError}) {
                                         type="submit"
                                         className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                     >
-                                        <svg className="animate-spin h-5 w-5 mr-3"></svg>
-                                        Start Reading &#128214;
+                                        Visit Your Shelves &#128278;
                                     </button>
                                 }
-
                             </div>
                         </div>
                     </form>
@@ -166,4 +119,4 @@ function SignupForm({handleError}) {
     );
 }
 
-export default SignupForm;
+export default LoginForm;
