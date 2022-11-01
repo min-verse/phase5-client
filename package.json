@@ -21,6 +21,7 @@
     "react-router-dom": "^6.4.2",
     "redux": "^4.2.0",
     "tailwind-merge": "^1.7.0",
+    "typewriter-effect": "^2.19.0",
     "vite-plugin-svgr": "^2.2.2"
   },
   "devDependencies": {

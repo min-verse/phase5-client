@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router';
 import LoginForm from './LoginForm';
 import { Modal, Button } from 'react-daisyui';
+import ErrorAlert from './ErrorAlert';
 
 function LoginModal({ open, toggle }){
 
@@ -28,7 +29,8 @@ function LoginModal({ open, toggle }){
             <Modal.Body>
                 Your books are waiting for you. Let's get reading! &#128522;
                 {errors && errors.length && errors.length > 0 ? 
-                                    <p className="py-4" style={{color:"red"}}>{errors}</p>
+                                    <ErrorAlert errors={errors} />
+                                    // <p className="py-4" style={{color:"red"}}>{errors}</p>
                                 :
                                 null}
                 <LoginForm handleError={toggleErrors}/>

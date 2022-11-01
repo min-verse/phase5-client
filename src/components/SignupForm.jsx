@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SignupForm({handleError}) {
+function SignupForm({ handleError }) {
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -9,7 +9,8 @@ function SignupForm({handleError}) {
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState('');
 
-    function handleExampleClick() {
+    function handleExampleClick(e) {
+        e.preventDefault();
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
@@ -43,10 +44,10 @@ function SignupForm({handleError}) {
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
-        if(password!==confirmPassword){
+        if (password !== confirmPassword) {
             setLoading(false);
             handleError("Passwords do not match. Unable to register new reader.");
-        }else{
+        } else {
             await fetch("http://localhost:5000/signup", {
                 method: "POST",
                 headers: {
@@ -63,9 +64,9 @@ function SignupForm({handleError}) {
                 .then(res => res.json())
                 .then((data) => {
                     setLoading(false);
-                    if(!data['status']['code']){
+                    if (!data['status']['code']) {
                         handleError(data['status']['message']);
-                    }else{
+                    } else {
                         console.dir(data);
                     }
                 });
@@ -80,7 +81,7 @@ function SignupForm({handleError}) {
                         <div className="overflow-hidden shadow sm:rounded-md">
                             <div className="bg-white px-4 py-5 sm:p-6">
                                 <div className="grid grid-cols-6 gap-6">
-                                    
+
                                     <div className="col-span-6">
                                         <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                                             Username
@@ -145,6 +146,7 @@ function SignupForm({handleError}) {
 
                                         className="inline-flex justify-center rounded-md border border-transparent bg-gray-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                         disabled>
+                                        <div className="animate-spin h-5 w-5 mr-3 ">&#128214;</div>
                                         Loading...
                                     </button>
                                     :
@@ -152,7 +154,7 @@ function SignupForm({handleError}) {
                                         type="submit"
                                         className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                     >
-                                        <svg className="animate-spin h-5 w-5 mr-3"></svg>
+
                                         Start Reading &#128214;
                                     </button>
                                 }
