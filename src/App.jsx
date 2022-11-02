@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import LandingPage from './components/pages/LandingPage';
+import HomePage from './components/pages/HomePage';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './components/state/user';
 import './App.css'
 
 function App() {
+
+  const dispatch = useDispatch();
+  const user = useSelector((state)=> state.user);
 
   useEffect(() => {
 
@@ -24,7 +29,17 @@ function App() {
             throw new Error("Unauthorized Request. Must be signed in.");
           }
         })
-        .then((json) => console.dir(json))
+        .then((data) =>{
+          dispatch(setUser(data));
+          dispatch(setReadings(data));
+          dispatch(setFriends(data));
+          dispatch(setPosts(data));
+          dispatch(setComments(data));
+          dispatch(setPendings(data));
+          dispatch(setGenres(data));
+          dispatch(setMoods(data));
+          console.log(user);
+        })
         .catch((err) => console.error(err));
     } else {
       // alert("Not logged in.");
@@ -47,6 +62,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/home" element={<HomePage />}/>
     </Routes>
   );
 }

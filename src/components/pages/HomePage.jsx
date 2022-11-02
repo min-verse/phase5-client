@@ -2,15 +2,16 @@ import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import NavBarLanding from '../NavBarLanding';
-import LandingContent from '../content/LandingContent';
+import NavBarUser from '../NavBarUser';
+import HomeContent from '../content/HomeContent';
 
-function LandingPage() {
+function HomePage() {
   return (
     <>
-    <NavBarLanding />
-    <LandingContent />
+    <NavBarUser />
+    <HomeContent />
     </>
   )
-};
+}
 
-export default LandingPage;
+export default HomePage;

@@ -2,6 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
     font-family: 'Josefin Sans', sans-serif;
+}
+
+.reading-card {
+    border-spacing: 0;
+    background-color: white;
+    /* width: calc(100% - 70px); */
+    width: 320px;
+    height: 600px;
+    margin: 20px;
+    padding: 10px;
+    /* overflow-y:auto;
+    overflow-x: auto; */
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    border: 2px solid;
+    box-shadow: 10px 10px 1px #80dbff, 10px 10px 1px 2px rgba(0, 0, 0, 1);
+}
+
+.reading-card-image-container{
+    width: 283px;
+    height: 80%;
+    margin: 5px;
+    
+}
+
+.reading-card-image{
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.reading-card-info{
+    text-align: center;
+}
+
+.reading-card-button{
+    margin-top: 5px;
+    width:120px;
+    height:30px;
+    font-size: 12px;
 }

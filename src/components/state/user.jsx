@@ -4,35 +4,54 @@ export const userSlice = createSlice({
     initialState: {
         profile: {},
         isAuthenticated: false,
-        books:[],
-        posts:[],
-        comments:[],
-        friends:[]
+        readings: [],
+        posts: [],
+        comments: [],
+        friends: [],
+        pendings:[],
+        genres:{},
+        moods: {}
     },
     reducers: {
         setUser: (state, action) => {
-            state.profile = { ...action.payload };
+            state.profile = {
+                id: action.payload.id,
+                email: action.payload.email,
+                username: action.payload.username
+            };
             state.isAuthenticated = true;
         },
         clearUser: (state) => {
             state.profile = {};
             state.isAuthenticated = false;
-            state.books=[];
-            state.posts=[];
-            state.comments=[];
+            state.readings = [];
+            state.posts = [];
+            state.comments = [];
         },
-        setBooks: (state, action) =>{
-            state.books = [...action.payload];
+        setReadings: (state, action) => {
+            state.readings = [...action.payload.readings];
         },
-        setFriends: (state, action) =>{
-            state.friends = [...action.payload];
+        setFriends: (state, action) => {
+            state.friends = [...action.payload.friends];
         },
-        setPosts: (state, action) =>{
-            state.posts = [...action.payload];
+        setPosts: (state, action) => {
+            state.posts = [...action.payload.posts];
         },
+        setComments: (state, action) => {
+            state.comments = [...action.payload.comments];
+        },
+        setPendings: (state, action) => {
+            state.pendings = [...action.payload.pendings];
+        },
+        setGenres: (state, action) => {
+            state.genres = {...action.payload.genres};
+        },
+        setMoods: (state, action) =>{
+            state.moods = {...action.payload.moods};
+        }
     },
 });
 
-export const { setUser, clearUser, setStocks, setPriceHistory, setDoughnutData, clearStocksData, setFollowing } = userSlice.actions;
+export const { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -2,28 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 export const bookSlice = createSlice({
     name: "book",
     initialState: {
-        portfolio: [],
-        priceHistory:{},
-        doughnutData:{}
+        results: [],
     },
     reducers: {
-        clearStocks: (state) => {
-            state.portfolio = [];
-            state.priceHistory = {};
-            state.doughnutData = {};
+        setResults: (state, payload) => {
+            state.results = [...action.payload];
         },
-        setPortfolio: (state, action) =>{
-            state.portfolio = [...action.payload];
-        },
-        setPriceHistory: (state, action) =>{
-            state.priceHistory = {...action.payload};
-        },
-        setDoughnutData: (state, action) =>{
-            state.doughnutData = {...action.payload};
+        clearResults: (state, action) =>{
+            state.results = [];
         }
     },
 });
 
-export const { clearStocks, setPortfolio, setPriceHistory, setDoughnutData } = bookSlice.actions;
+export const { setResults, clearResults } = bookSlice.actions;
 
 export default bookSlice.reducer;

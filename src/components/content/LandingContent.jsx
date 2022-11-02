@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import SignupModal from './SignupModal';
-import { Hero, Button } from 'react-daisyui';
+import SignupModal from '../SignupModal';
+import { Hero, Button, Toast } from 'react-daisyui';
 import Typewriter from 'typewriter-effect';
 
-function HomeContent() {
+function LandingContent() {
 
     const [visible, setVisible] = useState(false);
 
@@ -26,7 +26,7 @@ function HomeContent() {
                     <p className="py-6">
                         Maybe you're in the mood for...
                     </p>
-                    <div style={{height:75}}>
+                    <div style={{ height: 75 }}>
                         <h1 className="text-xl">
                             <Typewriter
                                 options={{
@@ -58,4 +58,4 @@ function HomeContent() {
     )
 }
 
-export default HomeContent;
+export default LandingContent;
