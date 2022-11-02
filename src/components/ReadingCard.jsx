@@ -3,8 +3,7 @@ import { Button, Progress } from 'react-daisyui';
 import { Link } from 'react-router-dom';
 
 function ReadingCard({book, progress}) {
-
-    console.log(book);
+    
     const {title, author, cover} = book;
 
     return (

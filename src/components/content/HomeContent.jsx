@@ -9,22 +9,29 @@ import ReadingCard from '../ReadingCard';
 function HomeContent() {
 
     const [visible, setVisible] = useState(false);
+    const [currentlyReading, setCurrentlyReading] = useState([]);
     const user = useSelector((state) => state.user);
-    console.log(user['readings']);
 
     useEffect(() => {
-
+        const newReading = user['readings'].filter((item)=>{
+            return item.status === "reading";
+        });
+        setCurrentlyReading(newReading);
     }, [user]);
+
     const toggleVisible = () => {
         setVisible(!visible)
     };
 
     return (
         <>
-            <div className="flex w-auto space-x-10 flex-nowrap overflow-x-auto p-8 bg-neutral rounded-2xl">
-                {user['readings'].map((item) => {
-                    console.log(item);
-                    console.log(item.book);
+        <h1 style={{
+            fontSize:30,
+            fontStyle:'italic',
+            paddingLeft:50
+        }}>Currently Reading</h1>
+            <div className="flex w-auto h-120 mx-4 space-x-10 flex-nowrap overflow-x-auto p-8 bg-[#bfdbfe] rounded-2xl">
+                {currentlyReading.map((item) => {
                     return (
                         <ReadingCard
                             key={item.id}

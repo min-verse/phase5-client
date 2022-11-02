@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import LandingPage from './components/pages/LandingPage';
 import HomePage from './components/pages/HomePage';
+import BookPage from './components/pages/BookPage';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './components/state/user';
@@ -62,7 +63,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/home" element={<HomePage />}/>
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/books/:id" element={<BookPage />}/>
     </Routes>
   );
 }
