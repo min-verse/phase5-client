@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import SignupModal from './SignupModal';
 import LoginModal from './LoginModal';
+import { useSelector } from 'react-redux';
 import { ReactComponent as BoocoSvg } from '../assets/booco-logo.svg';
 import { Navbar, Dropdown, Button, Menu, Form, Input } from 'react-daisyui';
 import { Link } from 'react-router-dom';
@@ -11,6 +12,7 @@ function NavBarUser() {
     const [registerVisible, setRegisterVisible] = useState(false);
     const [loginVisible, setLoginVisible] = useState(false);
     const [bookSearch, setBookSearch] = useState('');
+    const user = useSelector((state)=> state.user);
 
     const toggleRegisterVisible = () => {
         setRegisterVisible(!registerVisible)
@@ -75,7 +77,7 @@ function NavBarUser() {
                     {/* <a className="btn btn-ghost normal-case text-xl">BOOCO</a> */}
                 </Navbar.Start>
                 <Navbar.End className="navbar-user-end">
-
+                    {/* <h1 style={{marginRight:12}}>Welcome Back, {user['profile']['username']}</h1> */}
                     <Form onSubmit={handleSearch}>
                         <Input
                             onChange={handleSearchChange}

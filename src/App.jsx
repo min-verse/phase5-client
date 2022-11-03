@@ -12,6 +12,15 @@ function App() {
 
   const dispatch = useDispatch();
   const user = useSelector((state)=> state.user);
+  const navigate = useNavigate();
+
+  const goToUserHome = ()=>{
+    navigate("/home");
+  }
+
+  const goToLanding = ()=>{
+    navigate("/");
+  }
 
   useEffect(() => {
 
@@ -40,10 +49,15 @@ function App() {
           dispatch(setGenres(data));
           dispatch(setMoods(data));
           console.log(user);
+          goToUserHome();
         })
-        .catch((err) => console.error(err));
+        .catch((err) =>{ 
+          console.error(err);
+          goToLanding();
+        });
     } else {
       // alert("Not logged in.");
+      goToLanding();
     }
   }, []);
 
