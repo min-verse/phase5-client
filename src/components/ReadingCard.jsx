@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function ReadingCard({book, progress}) {
     
-    const {title, author, cover} = book;
+    const {id, title, author, cover} = book;
 
     return (
         <div className='reading-card'>
@@ -29,7 +29,8 @@ function ReadingCard({book, progress}) {
             
                 <Progress className="w-56 my-2 progress-blue" value={progress} max={100} />
             
-            <Button className="reading-card-button">More Info</Button>
+            <Link to={`/books/${id}`}  className="btn reading-card-button">More Info</Link>
+            {/* <Button className="reading-card-button"><Link to={`/books/${id}`}>More Info</Link></Button> */}
         </div>
     )
 }

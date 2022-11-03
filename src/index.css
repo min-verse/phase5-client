@@ -66,11 +66,38 @@
     margin: 10px 25px;
 }
 
-@media (max-width: 800px) {
+.book-title{
+    font-family: 'Akshar', sans-serif;
+    font-size: large;
+}
+
+@media (max-width: 950px) {
     .book-top-container{
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 800px){
+    .navbar-user-end{
+        display:none;
+    }
+}
+
+@media (max-width: 1024px){
+    .navbar-landing-end{
+        display:none;
+    }
+}
+
+.book-reading-button{
+    display:flex;
+    justify-content:flex-end;
+    align-items: flex-end;
+    flex-direction: row;
+    margin-bottom: 12px;
+}
+
+
 
 .book-card {
     border-spacing: 0;
@@ -87,6 +114,61 @@
     flex-direction: column;
     border: 2px solid;
     box-shadow: 10px 10px 1px #80dbff, 10px 10px 1px 2px rgba(0, 0, 0, 1);
+}
+
+.book-more-info {
+    border-spacing: 0;
+    background-color: white;
+    /* width: calc(100% - 70px); */
+    
+    /* overflow-y:auto;
+    overflow-x: auto; */
+    /* width:60%; */
+    padding: 12px;
+    display:flex;
+    margin: 5px 20px;
+    justify-content: center;
+    align-items:flex-start;
+    flex-direction: column;
+    border: 2px solid;
+    box-shadow: 10px 10px 1px #80dbff, 10px 10px 1px 2px rgba(0, 0, 0, 1);
+}
+
+.book-description{
+    margin:15px;
+    
+}
+
+.book-summary{
+    margin:15px;
+    font-family: 'Cabin', sans-serif;
+}
+
+.book-more-info-button{
+    border-radius: 8px;
+    background-color: #80dbff;
+    color:rgb(20, 56, 86);
+    transition: 0.3s;
+    font-style:italic;
+    height: 20px;
+    font-size: small;
+    padding: 1px 8px;
+}
+
+.book-title{
+    padding: 12px;
+}
+
+.book-more-info-button:hover{
+    border-radius: 8px;
+    background-color: #3b6677;
+    color:aliceblue;
+    transition: 0.3s;
+}
+
+.book-extra-details{
+    margin: 15px 0;
+    font-size: small;
 }
 
 .book-inner-info-container{
@@ -121,4 +203,18 @@
     width:120px;
     height:30px;
     font-size: 12px;
+}
+
+.genre-style{
+    color: #2c8154;
+    font-style: italic;
+    font-weight: 500;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.mood-style{
+    color: #bf2a92;
+    font-style: italic;
+    font-weight: 500;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

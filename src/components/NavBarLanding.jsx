@@ -47,12 +47,14 @@ function NavBarLanding() {
                     <BoocoSvg className="pb-1"/>
                     <a className="btn btn-ghost normal-case text-xl">BOOCO</a>
                 </Navbar.Start>
-                <Navbar.End>
+                <Navbar.End className="navbar-landing-end">
                     <Button onClick={toggleRegisterVisible} style={{ marginRight: 20 }} color="ghost">Sign Up</Button>
-                    <SignupModal open={registerVisible} toggle={toggleRegisterVisible} />
+                    
                     <Button onClick={toggleLoginVisible}>Log In</Button>
-                    <LoginModal open={loginVisible} toggle={toggleLoginVisible} />
+                    
                 </Navbar.End>
+                <SignupModal open={registerVisible} toggle={toggleRegisterVisible} />
+                <LoginModal open={loginVisible} toggle={toggleLoginVisible} />
             </Navbar>
         </div>
     )

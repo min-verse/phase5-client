@@ -9,39 +9,38 @@ import BookCard from '../BookCard';
 
 function BookContent({ bookId }) {
 
-    const [currentBook, setCurrentBook] = useState(false);
-    const [error, setError] = useState('');
-    const [currentlyReading, setCurrentlyReading] = useState([]);
-    const user = useSelector((state) => state.user);
+    const [currentBook, setCurrentBook] = useState();
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        let token = localStorage.getItem("token");
-        if (token) {
-            fetch(`http://localhost:5000/books/${bookId}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: token,
-                },
-            })
-                .then((res) => {
-                    if (res.ok) {
-                        return res.json();
-                    } else if (res.status == "401") {
-                        throw new Error("Unauthorized Request. Must be signed in.");
-                    }
+        console.log('evoked');
+        const getBook = async ()=>{
+            let token = localStorage.getItem("token");
+            if (token) {
+                await fetch(`http://localhost:5000/books/${bookId}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
                 })
-                .then((data) => {
-                    console.log(data);
-                })
-                .catch((err) => console.error(err));
-        } else {
-            // alert("Not logged in.");
-        }
-    }, [user]);
-
-    const toggleVisible = () => {
-        setVisible(!visible)
-    };
+                    .then((res) => {
+                        if (res.ok) {
+                            return res.json();
+                        } else if (res.status == "401") {
+                            throw new Error("Unauthorized Request. Must be signed in.");
+                        }
+                    })
+                    .then((data) => {
+                        console.log(data);
+                        setCurrentBook(data);
+                    })
+                    .catch((err) => console.error(err));
+            } else {
+                alert("Not logged in.");
+            }
+        };
+        getBook();
+    }, []);
 
     return (
         <>
@@ -51,7 +50,7 @@ function BookContent({ bookId }) {
                 paddingLeft: 50
             }}>{bookId}</h1>
         <div className="book-page">
-            <BookCard />
+            {currentBook && <BookCard book={currentBook} />}
         </div>
         </>
     )

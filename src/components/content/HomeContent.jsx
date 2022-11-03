@@ -30,7 +30,7 @@ function HomeContent() {
             fontStyle:'italic',
             paddingLeft:50
         }}>Currently Reading</h1>
-            <div className="flex w-auto h-120 mx-4 space-x-10 flex-nowrap overflow-x-auto p-8 bg-[#bfdbfe] rounded-2xl">
+            <div className="flex w-auto h-120 mx-4 space-x-10 flex-nowrap overflow-x-auto p-8 bg-gradient-to-r from-sky-500 to-indigo-500 rounded-2xl">
                 {currentlyReading.map((item) => {
                     return (
                         <ReadingCard

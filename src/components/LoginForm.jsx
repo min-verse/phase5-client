@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
 
 function LoginForm({ handleError }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
 
     function handleEmailChange(e) {
         const newEmail = e.target.value;
@@ -45,7 +48,14 @@ function LoginForm({ handleError }) {
             .then((data) => {
                 setLoading(false);
                 if (data['status']['code'] === 200) {
-
+                    dispatch(setUser(data['data']));
+                    dispatch(setReadings(data['data']));
+                    dispatch(setFriends(data['data']));
+                    dispatch(setPosts(data['data']));
+                    dispatch(setComments(data['data']));
+                    dispatch(setPendings(data['data']));
+                    dispatch(setGenres(data['data']));
+                    dispatch(setMoods(data['data']));
                 } else {
                     handleError(data);
                 }

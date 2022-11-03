@@ -4,6 +4,7 @@ import SignupModal from './SignupModal';
 import LoginModal from './LoginModal';
 import { ReactComponent as BoocoSvg } from '../assets/booco-logo.svg';
 import { Navbar, Dropdown, Button, Menu, Form, Input } from 'react-daisyui';
+import { Link } from 'react-router-dom';
 
 function NavBarUser() {
 
@@ -70,9 +71,10 @@ function NavBarUser() {
                         </Dropdown.Menu>
                     </Dropdown>
                     <BoocoSvg className="pb-1" />
-                    <a className="btn btn-ghost normal-case text-xl">BOOCO</a>
+                    <Link to="/home" className="btn btn-ghost normal-case text-xl">BOOCO</Link>
+                    {/* <a className="btn btn-ghost normal-case text-xl">BOOCO</a> */}
                 </Navbar.Start>
-                <Navbar.End>
+                <Navbar.End className="navbar-user-end">
 
                     <Form onSubmit={handleSearch}>
                         <Input

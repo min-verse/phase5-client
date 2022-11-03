@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
 
 function SignupForm({ handleError }) {
 
@@ -8,6 +10,7 @@ function SignupForm({ handleError }) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState('');
+    const dispatch = useDispatch();
 
     function handleExampleClick(e) {
         e.preventDefault();
@@ -67,7 +70,7 @@ function SignupForm({ handleError }) {
                     if (!data['status']['code']) {
                         handleError(data['status']['message']);
                     } else {
-                        console.dir(data);
+                        dispatch(setUser(data['data']));
                     }
                 });
         }
