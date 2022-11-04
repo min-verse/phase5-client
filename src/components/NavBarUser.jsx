@@ -2,17 +2,27 @@ import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import SignupModal from './SignupModal';
 import LoginModal from './LoginModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as BoocoSvg } from '../assets/booco-logo.svg';
 import { Navbar, Dropdown, Button, Menu, Form, Input } from 'react-daisyui';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function NavBarUser() {
 
     const [registerVisible, setRegisterVisible] = useState(false);
     const [loginVisible, setLoginVisible] = useState(false);
     const [bookSearch, setBookSearch] = useState('');
-    const user = useSelector((state)=> state.user);
+    const [loading, setLoading] = useState(false);
+    const user = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    function goToLanding() {
+        navigate("/");
+    }
 
     const toggleRegisterVisible = () => {
         setRegisterVisible(!registerVisible)
@@ -32,8 +42,33 @@ function NavBarUser() {
         e.target.reset();
     }
 
-    function handleLogOut(){
+    async function handleLogOut() {
         console.log('I\'ve been \n clicked');
+        try {
+            await fetch("http://localhost:5000/logout", {
+                method: "delete",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: localStorage.getItem("token"),
+                },
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        return res.json().then((json) => Promise.reject(json));
+                    }
+                })
+                .then((json) => {
+                    console.dir(json);
+                    localStorage.removeItem("token");
+                    dispatch(clearUser());
+                    goToLanding();
+                })
+                .catch((err) => alert(err));
+        } catch (error) {
+            alert(error);
+        }
     }
 
     return (
@@ -87,8 +122,13 @@ function NavBarUser() {
                             type="text"
                             placeholder="Search Books" />
                     </Form>
-                    <Button className="ml-4" onClick={handleLogOut}>Log Out</Button>
-
+                    {loading ?
+                        <Button className="ml-4" disabled>Logging Out... 
+                        <span className="animate-spin"><FontAwesomeIcon style={{color:'white', marginLeft:8}} icon={faSpinner} /></span>
+                        </Button>
+                        :
+                        <Button className="ml-4" onClick={handleLogOut}>Log Out</Button>
+                    }
                 </Navbar.End>
             </Navbar>
         </div>

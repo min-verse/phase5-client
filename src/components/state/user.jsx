@@ -27,6 +27,10 @@ export const userSlice = createSlice({
             state.readings = [];
             state.posts = [];
             state.comments = [];
+            state.friends=[];
+            state.pendings=[];
+            state.genres={};
+            state.moods={};
         },
         setReadings: (state, action) => {
             state.readings = [...action.payload.readings];

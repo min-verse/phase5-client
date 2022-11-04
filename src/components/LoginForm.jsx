@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
 
 function LoginForm({ handleError }) {
@@ -8,6 +9,11 @@ function LoginForm({ handleError }) {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const goToUserHome = ()=>{
+        navigate("/home");
+    }
 
     function handleEmailChange(e) {
         const newEmail = e.target.value;
@@ -56,6 +62,7 @@ function LoginForm({ handleError }) {
                     dispatch(setPendings(data['data']));
                     dispatch(setGenres(data['data']));
                     dispatch(setMoods(data['data']));
+                    goToUserHome();
                 } else {
                     handleError(data);
                 }

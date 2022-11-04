@@ -5,6 +5,7 @@ import { Hero, Button, Toast, Artboard } from 'react-daisyui';
 import Typewriter from 'typewriter-effect';
 import { useSelector, useDispatch } from 'react-redux';
 import ReadingCard from '../ReadingCard';
+import PostForm from '../PostForm';
 import BookCard from '../BookCard';
 import PostList from '../PostList';
 
@@ -12,7 +13,8 @@ function BookContent({ bookId }) {
 
     const [currentBook, setCurrentBook] = useState();
     const [posts, setPosts] = useState([]);
-    
+
+
 
     useEffect(() => {
         console.log('evoked');
@@ -35,7 +37,8 @@ function BookContent({ bookId }) {
                     .then((data) => {
                         console.log(data);
                         setCurrentBook(data);
-                        setPosts(data['posts']);
+                        const reversedPosts = data['posts'].reverse();
+                        setPosts(reversedPosts);
                     })
                     .catch((err) => console.error(err));
             } else {
@@ -45,9 +48,13 @@ function BookContent({ bookId }) {
         getBook();
     }, []);
 
-    const handlePostSubmit = (e) => {
-        e.preventDefault();
+    const handlePostSubmit = (obj) => {
+        console.log(e.target);
         console.log("I'm submitted!")
+        setPosts((prevPosts)=>{
+            return [obj, ...prevPosts];
+        })
+        
     };
 
     return (
@@ -62,11 +69,7 @@ function BookContent({ bookId }) {
             </div>
             <div>
                 {currentBook && <>
-                    <form onSubmit={handlePostSubmit}>
-                        <input type="text" name="postTitle" placeholder="Type here" className="input input-bordered input-info w-full max-w-xs" />
-                        <textarea name="postContent" className="textarea textarea-info" placeholder={`Share your thoughts on ${currentBook['title']} here`}></textarea>
-                        <button className="btn">Share Post</button>
-                    </form>
+                    <PostForm book={currentBook} handlePostSubmit={handlePostSubmit} />
                     <PostList posts={posts} />
                 </>}
             </div>
