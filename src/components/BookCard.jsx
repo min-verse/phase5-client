@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Progress } from 'react-daisyui';
 import PostCard from './PostCard';
 import { useDispatch } from 'react-redux';
-import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
+import { setUser, clearUser, setReadings, setReadingsUpdate, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostList from './PostList';
@@ -31,9 +31,8 @@ function BookCard({ book }) {
                     setStatus(readBook['status']);
                 }
             }
-        
-        
-    },[]);
+
+    },[user]);
 
     const handleClick = () => {
         const newBool = !visible;
@@ -61,7 +60,7 @@ function BookCard({ book }) {
                     .then((data) => {
                         setLoading(false);
                         console.log(data);
-                        dispatch(setReadings(data));
+                        dispatch(setReadingsUpdate(data));
                     });
             } else {
                 alert("You are not logged in.");

@@ -12,6 +12,7 @@ function BookContent({ bookId }) {
 
     const [currentBook, setCurrentBook] = useState();
     const [posts, setPosts] = useState([]);
+    
 
     useEffect(() => {
         console.log('evoked');

@@ -20,7 +20,7 @@ function HomeContent() {
             return item.status === "reading";
         });
         setCurrentlyReading(newReading);
-    }, [user]);
+    }, [user, user['readings']]);
 
     const toggleVisible = () => {
         setVisible(!visible)

@@ -48,10 +48,13 @@ export const userSlice = createSlice({
         },
         setMoods: (state, action) =>{
             state.moods = {...action.payload.moods};
+        },
+        setReadingsUpdate: (state, action) =>{
+            state.readings=[...action.payload]
         }
     },
 });
 
-export const { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } = userSlice.actions;
+export const { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods, setReadingsUpdate } = userSlice.actions;
 
 export default userSlice.reducer;
