@@ -49,8 +49,6 @@ function BookContent({ bookId }) {
     }, []);
 
     const handlePostSubmit = (obj) => {
-        console.log(e.target);
-        console.log("I'm submitted!")
         setPosts((prevPosts)=>{
             return [obj, ...prevPosts];
         })
