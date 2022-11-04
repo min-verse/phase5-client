@@ -218,3 +218,16 @@
     font-weight: 500;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+.post-card-container{
+    border-spacing: 0;
+    background-color: white;
+    padding: 12px;
+    display:flex;
+    margin: 5px 20px;
+    justify-content: center;
+    align-items:flex-start;
+    flex-direction: column;
+    border: 2px solid;
+    box-shadow: 10px 10px 1px #80dbff, 10px 10px 1px 2px rgba(0, 0, 0, 1);
+}

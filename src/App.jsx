@@ -6,7 +6,9 @@ import BookPage from './components/pages/BookPage';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './components/state/user';
+import PostPage from './components/pages/PostPage';
 import './App.css'
+import ReaderPage from './components/pages/ReaderPage';
 
 function App() {
 
@@ -40,6 +42,7 @@ function App() {
           }
         })
         .then((data) =>{
+          console.log(data);
           dispatch(setUser(data));
           dispatch(setReadings(data));
           dispatch(setFriends(data));
@@ -48,8 +51,6 @@ function App() {
           dispatch(setPendings(data));
           dispatch(setGenres(data));
           dispatch(setMoods(data));
-          console.log(user);
-          goToUserHome();
         })
         .catch((err) =>{ 
           console.error(err);
@@ -79,6 +80,8 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/books/:id" element={<BookPage />}/>
+      <Route path="/posts/:id" element={<PostPage />}/>
+      <Route path="/readers/:id" element={<ReaderPage />}/>
     </Routes>
   );
 }

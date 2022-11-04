@@ -8,21 +8,23 @@ import ReadingCard from '../ReadingCard';
 import BookCard from '../BookCard';
 import PostList from '../PostList';
 
-function BookContent({ bookId }) {
+function ReaderContent({ readerId }) {
 
-    const [currentBook, setCurrentBook] = useState();
-    const [posts, setPosts] = useState([]);
+    const [currentReader, setCurrentReader] = useState();
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
         console.log('evoked');
-        const getBook = async () => {
+        const getPost = async () => {
             let token = localStorage.getItem("token");
             if (token) {
-                await fetch(`http://localhost:5000/books/${bookId}`, {
+                await fetch(`http://localhost:5000/reader_page`, {
+                    method:'POST',
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: token,
                     },
+                    body: JSON.stringify({reader: readerId})
                 })
                     .then((res) => {
                         if (res.ok) {
@@ -33,18 +35,18 @@ function BookContent({ bookId }) {
                     })
                     .then((data) => {
                         console.log(data);
-                        setCurrentBook(data);
-                        setPosts(data['posts']);
+                        setCurrentReader(data);
+                        
                     })
                     .catch((err) => console.error(err));
             } else {
                 alert("Not logged in.");
             }
         };
-        getBook();
+        getPost();
     }, []);
 
-    const handlePostSubmit = (e) => {
+    const handlePostSubmit = (e)=>{
         e.preventDefault();
         console.log("I'm submitted!")
     };
@@ -55,22 +57,9 @@ function BookContent({ bookId }) {
                 fontSize: 30,
                 fontStyle: 'italic',
                 paddingLeft: 50
-            }}>{bookId}</h1>
-            <div className="book-page">
-                {currentBook && <BookCard book={currentBook} />}
-            </div>
-            <div>
-                {currentBook && <>
-                    <form onSubmit={handlePostSubmit}>
-                        <input type="text" name="postTitle" placeholder="Type here" className="input input-bordered input-info w-full max-w-xs" />
-                        <textarea name="postContent" className="textarea textarea-info" placeholder={`Share your thoughts on ${currentBook['title']} here`}></textarea>
-                        <button className="btn">Share Post</button>
-                    </form>
-                    <PostList posts={posts} />
-                </>}
-            </div>
+            }}>{readerId}</h1>
         </>
     )
 }
 
-export default BookContent;
+export default ReaderContent;

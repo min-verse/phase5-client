@@ -1,16 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Progress } from 'react-daisyui';
+import PostCard from './PostCard';
 import { useDispatch } from 'react-redux';
 import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import PostList from './PostList';
 
 function BookCard({ book }) {
 
-    const { id, title, author, total_pages, publisher, year_published, genres, moods, description, cover, ISBN } = book;
+    const { id, title, author, total_pages, publisher, year_published, genres, moods, description, cover, ISBN, posts } = book;
+    const user = useSelector((state)=>state.user);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [inReading, setInReading] = useState(false);
+    const [status, setStatus] = useState('');
     const [visible, setVisible] = useState(false);
+    const [bookPosts, setBookPosts] = useState([]);
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+
+            setBookPosts(posts);
+            if(user['readings'] && user['readings'].length && user['readings'].length > 0){
+                console.log(user['readings']);
+                const readBook = user['readings'].find(readingBook => readingBook['book']['id'] === id);
+                console.log(readBook);
+                if(readBook){
+                    setInReading(true);
+                    setStatus(readBook['status']);
+                }
+            }
+        
+        
+    },[]);
 
     const handleClick = () => {
         const newBool = !visible;
@@ -21,11 +44,11 @@ function BookCard({ book }) {
         e.preventDefault();
         setLoading(true);
         const status = e.target['select-status'].value;
-        try{
+        try {
             let token = localStorage.getItem("token");
-            if(token){
+            if (token) {
                 await fetch(`http://localhost:5000/readings`, {
-                    method:'PATCH',
+                    method: 'PATCH',
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: token,
@@ -35,15 +58,15 @@ function BookCard({ book }) {
                         status: status
                     })
                 }).then(res => res.json())
-                .then((data)=>{
-                    setLoading(false);
-                    console.log(data);
-                    dispatch(setReadings(data));
-                });
-            }else{
+                    .then((data) => {
+                        setLoading(false);
+                        console.log(data);
+                        dispatch(setReadings(data));
+                    });
+            } else {
                 alert("You are not logged in.");
             }
-        }catch(error){
+        } catch (error) {
             setError(error);
         }
         setLoading(true);
@@ -57,6 +80,10 @@ function BookCard({ book }) {
             <div className="book-top-container">
                 <div className="book-card-image-container">
                     <img src={cover} className="book-card-image" />
+                    {inReading && <>
+                    <small style={{fontStyle:"italic"}}>Already in shelf</small>
+                        <p className="btn">{status}</p>
+                    </>}
                 </div>
                 <div className="book-inner-info">
                     <div className='book-card'>
@@ -72,52 +99,52 @@ function BookCard({ book }) {
                             <p>genre(s): {genres.map((genre, index) => {
                                 if (index !== genres.length - 1) {
                                     return (
-                                        <span className="genre-style">{genre}, </span>
+                                        <span key={index} className="genre-style">{genre}, </span>
                                     );
                                 } else {
                                     return (
-                                        <span className="genre-style">{genre}</span>
+                                        <span key={index} className="genre-style">{genre}</span>
                                     );
                                 }
                             })}</p>
                             <p>mood(s): {moods.map((mood, index) => {
                                 if (index !== moods.length - 1) {
                                     return (
-                                        <span className="mood-style">{mood}, </span>
+                                        <span key={index} className="mood-style">{mood}, </span>
                                     );
                                 } else {
                                     return (
-                                        <span className="mood-style">{mood}</span>
+                                        <span key={index} className="mood-style">{mood}</span>
                                     );
                                 }
 
                             })}</p>
                         </div>
                         <div className="book-reading-button">
-                        {error && error.length && error.length > 0 ? 
-                                    <ErrorAlert errors={error} />
+                            {error && error.length && error.length > 0 ?
+                                <ErrorAlert errors={error} />
                                 :
                                 null}
                             {loading ?
-                            
+
                                 <select className="select select-info w-full max-w-xs book-reading-select" disabled>
                                     <option>
                                         &#128214;
                                         Setting status...
                                     </option>
                                 </select>
-                            
+
                                 :
-                                <form onSubmit={handleSelect} style={{display: 'flex', justifyContent:'flex-end'}}>
+                                <form onSubmit={handleSelect} style={{ display: 'flex', justifyContent: 'flex-end' }}>
                                     <select name="select-status" className="select select-info w-full max-w-xs book-reading-select">
-                                        <option disabled selected>Select status</option>
+                                        <option disabled defaultValue>Select status</option>
                                         <option value="to-read">to-read</option>
                                         <option value="reading">reading</option>
                                         <option value="completed">completed</option>
                                     </select>
                                     <button type="submit" className="btn btn-active btn-ghost" style={{
-                                        fontSize:'small',
-                                        marginLeft:10
+                                        fontSize: 'small',
+                                        marginLeft: 10
                                     }}>Set Status</button>
                                 </form>
                             }
@@ -137,7 +164,14 @@ function BookCard({ book }) {
                     </div>
                 </div>
             </div>
-            
+            {/* <div>
+                {posts && posts.length && posts.length > 0 ? <>
+                <PostList posts={bookPosts}/>
+                    </>
+                    :
+                    <h1>no posts yet</h1>
+                }
+            </div> */}
         </>
     )
 }
