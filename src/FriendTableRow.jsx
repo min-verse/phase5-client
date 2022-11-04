@@ -18,7 +18,7 @@ function FriendTableRow({friend, book}) {
         <>
             <tr>
                 <td className="px-6 py-4 text-justify">{username}</td>
-                <td className="px-6 py-4 text-justify flex-wrap">{currentRead}</td>
+                <td className="px-6 py-4 text-justify flex-wrap" key={1}>{currentRead}</td>
                 <td className="px-6 py-4 text-justify"><Link to={`/readers/${id}`}  className="btn reading-card-button">Details</Link></td>
             </tr>
         </>
