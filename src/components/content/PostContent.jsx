@@ -10,10 +10,14 @@ import ReadingCard from '../ReadingCard';
 import BookCard from '../BookCard';
 import PostList from '../PostList';
 import CommentList from '../CommentList';
+import CommentForm from '../CommentForm';
+import ErrorAlert from '../ErrorAlert';
 
 function PostContent({ postId }) {
 
     const [currentPost, setCurrentPost] = useState();
+    const [postAuthor, setPostAuthor] = useState('');
+    const [error, setError] = useState('');
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
@@ -37,6 +41,7 @@ function PostContent({ postId }) {
                     .then((data) => {
                         console.log(data);
                         setCurrentPost(data);
+                        setPostAuthor(data['user']);
                         setComments(data['comments']);
                     })
                     .catch((err) => console.error(err));
@@ -47,36 +52,46 @@ function PostContent({ postId }) {
         getPost();
     }, []);
 
-    const handlePostSubmit = (e)=>{
+    const handlePostSubmit = (e) => {
         e.preventDefault();
         console.log("I'm submitted!");
     };
 
-    const handleNewComment = (obj)=>{
-        e.preventDefault();
+    const handleError = (err)=>{
+        setError(err);
+    };
 
-        setComments((prevComments)=>{
+    const handleNewComment = (obj) => {
+        setComments((prevComments) => {
             return [...prevComments, obj];
         });
     };
 
     return (
         <>
-        {currentPost &&
-        <Link to={`/books/${currentPost['book']['id']}`} className="btn"><FontAwesomeIcon style={{color:'white', marginRight:8}} icon={faChevronLeft} /> Back to {currentPost['book']['title']}</Link>
-        }
-            <h1 style={{
-                fontSize: 30,
-                fontStyle: 'italic',
-                paddingLeft: 50
-            }}>{postId}</h1>
-            <div className="post-card-container">
-                {currentPost && <div>
-                <h1>{currentPost['title']}</h1>
-                <p>{currentPost['content']}</p>
-                </div>}
-            </div>
-            <CommentList comments={comments} handleNewComment={handleNewComment} />
+            {currentPost &&
+                <>
+
+                    <Link to={`/books/${currentPost['book']['id']}`} className="btn"><FontAwesomeIcon style={{ color: 'white', marginRight: 8 }} icon={faChevronLeft} /> Back to {currentPost['book']['title']}</Link>
+                    {error && error.length && error.length > 0 ? 
+                    <ErrorAlert />
+                    :
+                    null}
+                    <h1 style={{
+                        fontSize: 30,
+                        fontStyle: 'italic',
+                        paddingLeft: 50
+                    }}>{postId}</h1>
+                    <div className="post-card-container">
+                        {currentPost && <div>
+                            <h1>{currentPost['title']}</h1>
+                            <p>{currentPost['content']}</p>
+                        </div>}
+                    </div>
+                    <CommentForm handleError={handleError} post={currentPost}  handleNewComment={handleNewComment}/>
+                    <CommentList comments={comments} />
+                </>
+            }
         </>
     )
 }

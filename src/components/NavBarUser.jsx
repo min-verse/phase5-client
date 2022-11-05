@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as BoocoSvg } from '../assets/booco-logo.svg';
 import { Navbar, Dropdown, Button, Menu, Form, Input } from 'react-daisyui';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 function NavBarUser() {
 
@@ -22,6 +22,10 @@ function NavBarUser() {
 
     function goToLanding() {
         navigate("/");
+    }
+
+    function goToResults(query) {
+        navigate(`/browse?title=${query}`);
     }
 
     const toggleRegisterVisible = () => {
@@ -38,8 +42,8 @@ function NavBarUser() {
 
     function handleSearch(e) {
         e.preventDefault();
-        console.log(e.target.search.value);
-        e.target.reset();
+        const encoded = encodeURIComponent(bookSearch);
+        goToResults(encoded);
     }
 
     async function handleLogOut() {
@@ -104,7 +108,7 @@ function NavBarUser() {
                                         placeholder="Search Books" />
                                 </Form>
                             </Dropdown.Item>
-                            <Dropdown.Item><Button className="ml-4" onClick={toggleLoginVisible}>Log Out</Button></Dropdown.Item>
+                            <Dropdown.Item><Button className="ml-4" onClick={handleLogOut}>Log Out</Button></Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                     <BoocoSvg className="pb-1" />
