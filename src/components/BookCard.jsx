@@ -73,10 +73,6 @@ function BookCard({ book }) {
         } catch (error) {
             setError(error);
         }
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 3000);
     }
 
     const handlePageSubmit = async (e) => {
@@ -115,10 +111,7 @@ function BookCard({ book }) {
         } catch (error) {
             setError(error);
         }
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 3000);
+        
     }
 
     return (

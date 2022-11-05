@@ -37,6 +37,7 @@ function BookResultsPage() {
             })
             .then((data) => {
                 console.log(data);
+                setBookResults(data);
             })
             .catch((err) => {
                 console.error(err);
@@ -47,7 +48,7 @@ function BookResultsPage() {
     return (
         <>
             <NavBarUser />
-            <BookResultsContent />
+            <BookResultsContent books={bookResults}/>
         </>
     )
 }

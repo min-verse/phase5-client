@@ -8,16 +8,18 @@ import ReadingCard from '../ReadingCard';
 import PostForm from '../PostForm';
 import BookCard from '../BookCard';
 import PostList from '../PostList';
+import BookResultList from '../BookResultList';
 
-function BookResultsContent() {
+function BookResultsContent({books}) {
 
   
 
-    return (
+    return(
         <>
-            <h1>Book Results Page</h1>
+        <h1>Book Results Page</h1>
+        <BookResultList books={books}/>
         </>
-    )
+    );
 }
 
 export default BookResultsContent;
