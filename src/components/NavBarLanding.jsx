@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import SignupModal from './SignupModal';
+import SignupModalNavBar from './SignUpModalNavBar';
 import LoginModal from './LoginModal';
 import { ReactComponent as BoocoSvg } from '../assets/booco-logo.svg';
 import { Navbar, Dropdown, Button, Menu } from 'react-daisyui';
@@ -53,7 +54,7 @@ function NavBarLanding() {
                     <Button onClick={toggleLoginVisible}>Log In</Button>
                     
                 </Navbar.End>
-                <SignupModal open={registerVisible} toggle={toggleRegisterVisible} />
+                <SignupModalNavBar open={registerVisible} toggle={toggleRegisterVisible} />
                 <LoginModal open={loginVisible} toggle={toggleLoginVisible} />
             </Navbar>
         </div>

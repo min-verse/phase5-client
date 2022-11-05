@@ -10,6 +10,8 @@ import PostPage from './components/pages/PostPage';
 import './App.css'
 import ReaderPage from './components/pages/ReaderPage';
 import BookResultsPage from './components/pages/BookResultsPage';
+import ReaderResultsContent from './components/content/ReaderResultsContent';
+import ReaderResultsPage from './components/pages/ReaderResultsPage';
 
 function App() {
 
@@ -82,6 +84,7 @@ function App() {
       <Route path="/home" element={<HomePage />} />
       <Route path="/books/:id" element={<BookPage />}/>
       <Route path="/browse" element={<BookResultsPage />} />
+      <Route path="/readersearch" element={<ReaderResultsPage />} />
       <Route path="/posts/:id" element={<PostPage />}/>
       <Route path="/readers/:id" element={<ReaderPage />}/>
     </Routes>

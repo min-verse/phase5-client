@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
 
-function SignupForm({ handleError }) {
+function SignupFormNavBar({ handleError }) {
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -47,17 +47,10 @@ function SignupForm({ handleError }) {
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
-        // const form = document.getElementById('sign-up-form');
-        // const formData = new FormData(form);
-        // const userObj = {
-        //     username: formData.get('username'),
-        //     email: formData.get('email'),
-        //     password: formData.get('password'),
-        // };
-        // let photoInput = document.getElementById('profile-photo-input');
-        // if (photoInput.files[0]) {
-        //     const uploadedPicture = photoInput.files[0];
-        //     userObj['profilePicture'] = uploadedPicture;
+        // const formData = new FormData();
+        // let photoInput = document.getElementById('profile-photo-input-nav');
+        // if(photoInput.files[0]){
+            
         // }
         if (password !== confirmPassword) {
             setLoading(false);
@@ -73,7 +66,7 @@ function SignupForm({ handleError }) {
                         username: username,
                         email: email,
                         password: password,
-                    }
+                    },
                 }),
             })
                 .then(res => res.json())
@@ -88,47 +81,11 @@ function SignupForm({ handleError }) {
         }
     }
 
-    // async function exampleSubmit(e) {
-    //     e.preventDefault();
-    //     setLoading(true);
-    //     const form = document.getElementById('sign-up-form');
-    //     const formData = new FormData(form);
-    //     const userObj = {
-    //         username: formData.get('username'),
-    //         email: formData.get('email'),
-    //         password: formData.get('password'),
-    //     };
-    //     let photoInput = document.getElementById('profile-photo-input');
-    //     if (photoInput.files[0]) {
-    //         const uploadedPicture = photoInput.files[0];
-    //         userObj['profilePicture'] = uploadedPicture;
-    //     }
-    //     if (password !== confirmPassword) {
-    //         setLoading(false);
-    //         handleError("Passwords do not match. Unable to register new reader.");
-    //     } else {
-    //         await fetch("http://localhost:5000/example_register", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({
-    //                 user: userObj
-    //             }),
-    //         })
-    //             .then(res => res.json())
-    //             .then((data) => {
-    //                 setLoading(false);
-    //                 console.log(data);
-    //             });
-    //     }
-    // }
-
     return (
         <div className="mt-10 sm:mt-0">
             <div>
                 <div className="mt-5 md:col-span-2 md:mt-0">
-                    <form id="sign-up-form" onSubmit={exampleSubmit}>
+                    <form id="sign-up-form-nav" onSubmit={handleSubmit}>
                         <div className="overflow-hidden shadow sm:rounded-md">
                             <div className="bg-white px-4 py-5 sm:p-6">
                                 <div className="grid grid-cols-6 gap-6">
@@ -153,7 +110,7 @@ function SignupForm({ handleError }) {
                                         </label>
                                         <input
                                             type="text"
-                                            name="email"
+                                            name="email-address"
                                             value={email}
                                             onChange={handleEmailChange}
                                             autoComplete="email"
@@ -181,7 +138,7 @@ function SignupForm({ handleError }) {
                                         </label>
                                         <input
                                             type="password"
-                                            name="confirmPassword"
+                                            name="confirm-password"
                                             onChange={handleConfirmPasswordChange}
                                             value={confirmPassword}
                                             autoComplete="password"
@@ -194,7 +151,7 @@ function SignupForm({ handleError }) {
                                             Upload Profile Picture
                                         </label>
                                         <input
-                                            id="profile-photo-input"
+                                            id="profile-photo-input-nav"
                                             type="file"
                                             accept="image/png, image/jpeg"
                                             name="profilePicture"
@@ -233,4 +190,4 @@ function SignupForm({ handleError }) {
     );
 }
 
-export default SignupForm;
+export default SignupFormNavBar;
