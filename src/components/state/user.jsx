@@ -55,10 +55,13 @@ export const userSlice = createSlice({
         },
         setReadingsUpdate: (state, action) =>{
             state.readings=[...action.payload]
+        },
+        setPendingsUpdate: (state, action) =>{
+            state.pendings=[...action.payload]
         }
     },
 });
 
-export const { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods, setReadingsUpdate } = userSlice.actions;
+export const { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods, setReadingsUpdate, setPendingsUpdate } = userSlice.actions;
 
 export default userSlice.reducer;

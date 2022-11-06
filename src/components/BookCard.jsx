@@ -75,6 +75,36 @@ function BookCard({ book }) {
         }
     }
 
+    const handleReadingDelete = async () =>{
+        setLoading(true)
+        try{
+            let token = localStorage.getItem("token");
+            if(token){
+                await fetch(`http://localhost:5000/readings/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    }
+                }).then(res => res.json())
+                    .then((data) => {
+                        if (data['error']) {
+                            setError(data['error']);
+                        } else {
+                            setError('');
+                            setLoading(false);
+                            setInReading(false);
+                            console.log(data);
+                            setStatus('');
+                            dispatch(setReadingsUpdate(data));
+                        }
+                    });
+            }
+        }catch(error){
+            setError(error);
+        }
+    };
+
     const handlePageSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -111,7 +141,7 @@ function BookCard({ book }) {
         } catch (error) {
             setError(error);
         }
-        
+
     }
 
     return (
@@ -119,18 +149,28 @@ function BookCard({ book }) {
             <div className="book-top-container">
                 <div className="book-card-image-container">
                     <img src={cover} className="book-card-image" />
-                    {inReading && <div>
-                        <Progress className="progress-accent bg-[#d1d5db]" value={currentProgress} max={100} />
-                        <form onSubmit={handlePageSubmit}>
-                            <input type="number" name="pageCount" min={0} max={total_pages} className="peer w-full" placeholder="Set pages read"></input>
-                            <p className="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
-                                Page not in range {0} to {total_pages}.
-                            </p>
-                            <button type="submit" className="btn">Set Pages</button>
-                        </form>
-                        <small style={{ fontStyle: "italic" }}>Already in shelf</small>
-                        <p className="btn">{status}</p>
-                    </div>}
+                    {inReading &&
+                        <div>
+                            {status === "reading" &&
+                                <>
+                                    <Progress className="progress-accent bg-[#d1d5db]" value={currentProgress} max={100} />
+                                    <form onSubmit={handlePageSubmit}>
+                                        <input type="number" name="pageCount" min={0} max={total_pages} className="peer w-full" placeholder="Set pages read"></input>
+                                        <p className="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
+                                            Page not in range {0} to {total_pages}.
+                                        </p>
+                                        <button type="submit" className="btn">Set Pages</button>
+                                    </form>
+                                </>
+                            }
+                            <small style={{ fontStyle: "italic" }}>Already in shelf</small>
+                            <p className="btn" disabled>{status}</p>
+                            {loading ? 
+                            <button className="btn btn-error" disabled>Removing...</button>
+                            :
+                            <button onClick={handleReadingDelete} className="btn btn-error">Remove</button>
+                            }
+                        </div>}
                 </div>
                 <div className="book-inner-info">
                     {error && error.length && error.length > 0 ?

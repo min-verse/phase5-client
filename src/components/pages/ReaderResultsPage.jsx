@@ -38,6 +38,7 @@ function ReaderResultsPage() {
             })
             .then((data) => {
                 console.log(data);
+                setReaderResults(data);
             })
             .catch((err) => {
                 console.error(err);
@@ -48,7 +49,7 @@ function ReaderResultsPage() {
     return (
         <>
             <NavBarUser />
-            <ReaderResultsContent />
+            <ReaderResultsContent readers={readerResults}/>
         </>
     )
 }

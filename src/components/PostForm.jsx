@@ -41,6 +41,7 @@ function PostForm({ book, handlePostSubmit }) {
             }
         })
             .then((data) => {
+                console.log(data);
                 handlePostSubmit(data);
                 setPostTitle('');
                 setPostContent('');

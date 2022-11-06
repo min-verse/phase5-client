@@ -8,14 +8,15 @@ import ReadingCard from '../ReadingCard';
 import PostForm from '../PostForm';
 import BookCard from '../BookCard';
 import PostList from '../PostList';
+import ReaderResultList from '../ReaderResultList';
 
-function ReaderResultsContent() {
+function ReaderResultsContent({readers}) {
 
   
 
     return (
         <>
-            <h1>Reader Results Page</h1>
+            <ReaderResultList readers={readers} />
         </>
     )
 }
