@@ -7,9 +7,10 @@ export const userSlice = createSlice({
         readings: [],
         posts: [],
         comments: [],
+        outgoings: [],
         friends: [],
-        pendings:[],
-        genres:{},
+        pendings: [],
+        genres: {},
         moods: {}
     },
     reducers: {
@@ -27,10 +28,10 @@ export const userSlice = createSlice({
             state.readings = [];
             state.posts = [];
             state.comments = [];
-            state.friends=[];
-            state.pendings=[];
-            state.genres={};
-            state.moods={};
+            state.friends = [];
+            state.pendings = [];
+            state.genres = {};
+            state.moods = {};
         },
         setReadings: (state, action) => {
             state.readings = [...action.payload.readings];
@@ -48,20 +49,38 @@ export const userSlice = createSlice({
             state.pendings = [...action.payload.pendings];
         },
         setGenres: (state, action) => {
-            state.genres = {...action.payload.genres};
+            state.genres = { ...action.payload.genres };
         },
-        setMoods: (state, action) =>{
-            state.moods = {...action.payload.moods};
+        setMoods: (state, action) => {
+            state.moods = { ...action.payload.moods };
         },
-        setReadingsUpdate: (state, action) =>{
-            state.readings=[...action.payload]
+        setReadingsUpdate: (state, action) => {
+            state.readings = [...action.payload]
         },
-        setPendingsUpdate: (state, action) =>{
-            state.pendings=[...action.payload]
+        setPendingsUpdate: (state, action) => {
+            state.pendings = [...action.payload]
+        },
+        setOutgoings: (state, action) => {
+            state.outgoings = [...action.payload.outgoings]
+        },
+        setOutoingsUpdate: (state, action) => {
+            state.outgoings = [...action.payload]
         }
     },
 });
 
-export const { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods, setReadingsUpdate, setPendingsUpdate } = userSlice.actions;
+export const { setUser,
+    clearUser,
+    setReadings,
+    setFriends,
+    setPosts,
+    setComments,
+    setPendings,
+    setGenres,
+    setMoods,
+    setReadingsUpdate,
+    setPendingsUpdate,
+    setOutgoings,
+    setOutoingsUpdate } = userSlice.actions;
 
 export default userSlice.reducer;

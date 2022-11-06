@@ -8,6 +8,7 @@ function ReaderResultCard({ reader }) {
 
     const [inFriends, setInFriends] = useState(false);
     const [inPending, setInPending] = useState(false);
+    const [inOutgoing, setInOutgoing] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const { id, username, readings } = reader;
@@ -18,10 +19,13 @@ function ReaderResultCard({ reader }) {
         if (user['friends'] && user['friends'].length && user['friends'].length > 0) {
             const addedFriend = user['friends'].find(reader => reader['friend']['id'] === id);
             const pendingFriend = user['pendings'].find(reader => reader['friend']['id'] === id);
+            const outgoingFriend = user['outgoings'].find(reader => reader['friend']['id'] === id);
             if (addedFriend) {
                 setInFriends(true);
             } else if (pendingFriend) {
                 setInPending(true);
+            } else if (outgoingFriend) {
+                setInOutgoing(true);
             }
         }
     }, [user]);
@@ -87,7 +91,7 @@ function ReaderResultCard({ reader }) {
                                 return (
                                     <span key={index}>{book['book']['title']}, </span>
                                 );
-                            } else{
+                            } else {
                                 return (
                                     <span key={index}>{book['book']['title']}</span>
                                 );
@@ -102,12 +106,15 @@ function ReaderResultCard({ reader }) {
                         <button className="btn" disabled>Already Friends</button>
                         :
                         inPending ?
-                            <button className="btn" disabled>Already Requested</button>
+                            <button className="btn" disabled>In Your Pending</button>
                             :
-                            loading ?
-                                <button className="btn" disabled>Sending Request...</button>
+                            inOutgoing ?
+                                <button className="btn" disabled>Already Requested</button>
                                 :
-                                <button className="btn" onClick={handleSendRequest}>Send Friend Request</button>
+                                loading ?
+                                    <button className="btn" disabled>Sending Request...</button>
+                                    :
+                                    <button className="btn" onClick={handleSendRequest}>Send Friend Request</button>
                     }
                 </div>
             </div>

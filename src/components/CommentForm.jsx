@@ -6,6 +6,8 @@ function CommentForm({ post, handleError, handleNewComment }) {
     const [commentContent, setCommentContent] = useState('');
 
     const {id, user} = post;
+    const {username} = user;
+    console.log(post);
 
     const handleCommentChange = (e) => {
         const newComment = e.target.value;
@@ -52,7 +54,7 @@ function CommentForm({ post, handleError, handleNewComment }) {
                     value={commentContent}
                     onChange={handleCommentChange}
                     className="textarea textarea-info"
-                    placeholder={`Add a comment to ${user}'s post`}></textarea>
+                    placeholder={`Add a comment to ${username}'s post`}></textarea>
                 <button type="submit" className="btn">Add Comment</button>
             </form>
         </>

@@ -5,7 +5,7 @@ import HomePage from './components/pages/HomePage';
 import BookPage from './components/pages/BookPage';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './components/state/user';
+import { setUser, clearUser, setReadings, setOutgoings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './components/state/user';
 import PostPage from './components/pages/PostPage';
 import './App.css'
 import ReaderPage from './components/pages/ReaderPage';
@@ -54,6 +54,7 @@ function App() {
           dispatch(setPendings(data));
           dispatch(setGenres(data));
           dispatch(setMoods(data));
+          dispatch(setOutgoings(data));
         })
         .catch((err) =>{ 
           console.error(err);

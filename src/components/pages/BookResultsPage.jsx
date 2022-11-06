@@ -7,6 +7,7 @@ import NavBarUser from '../NavBarUser';
 import HomeContent from '../content/HomeContent';
 import BookContent from '../content/BookContent';
 import BookResultsContent from '../content/BookResultsContent';
+import BookSearchForm from '../BookSearchForm';
 
 function BookResultsPage() {
 
@@ -48,6 +49,7 @@ function BookResultsPage() {
     return (
         <>
             <NavBarUser />
+            <BookSearchForm />
             <BookResultsContent books={bookResults}/>
         </>
     )
