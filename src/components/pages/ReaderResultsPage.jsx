@@ -49,6 +49,9 @@ function ReaderResultsPage() {
     return (
         <>
             <NavBarUser />
+            <form>
+                
+            </form>
             <ReaderResultsContent readers={readerResults}/>
         </>
     )

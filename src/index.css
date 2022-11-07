@@ -6,6 +6,13 @@
     font-family: 'Josefin Sans', sans-serif;
 }
 
+.top-container-test{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
 /* Reading Card Styling */
 
 .reading-card {
@@ -49,6 +56,16 @@
     font-size: 12px;
 }
 
+.reading-gallery-height{
+    height:800px;
+}
+
+.example-table-height{
+    height:785px;
+    width:100%;
+    padding-right: 5px;
+}
+
 /* Book Card Styling */
 .book-page {
     display: flex;
@@ -81,6 +98,12 @@
     }
 }
 
+@media (max-width:750px){
+    .example-table-height{
+        width: 100vw;
+    }
+}
+
 @media (max-width: 800px) {
     .navbar-user-end {
         display: none;
@@ -90,6 +113,32 @@
 @media (max-width: 1024px) {
     .navbar-landing-end {
         display: none;
+    }
+    .reading-gallery-height{
+        height:750px;
+    }
+
+    .example-table-height{
+        height:600px;
+        width: 100vw;
+    }
+
+}
+
+@media (max-width: 1300px) {
+    .top-container-test{
+        flex-direction: column;
+    }
+
+    
+    .reading-gallery-height{
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
+
+    .example-table-height{
+        
+        width: 100vw;
     }
 }
 
@@ -235,4 +284,21 @@
     flex-direction: column;
     border: 2px solid;
     box-shadow: 10px 10px 1px #80dbff, 10px 10px 1px 2px rgba(0, 0, 0, 1);
+}
+
+.home-second-section{
+    display: flex;
+    flex-wrap: wrap;
+    /* width: 100%; */
+    justify-content: center;
+    gap: 20px;
+}
+
+.column{
+    overflow-y:auto;
+}
+
+.example2-table-height{
+    height:485px;
+  
 }
