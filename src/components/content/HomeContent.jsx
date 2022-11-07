@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import FriendTable from '../FriendTable';
 import ReadingCard from '../ReadingCard';
 import ReadingGallery from '../ReadingGallery';
+import ExampleTableComponent from '../ExampleTableComponent';
 
 function HomeContent() {
 
@@ -71,13 +72,23 @@ function HomeContent() {
                 </form>
                 {user['friends'] && user['friends'].length && user['friends'].length > 0 ?
 
-                    <FriendTable friends={user['friends']} />
+                    <ExampleTableComponent />
                     :
                     <h1>
                         No fellow readers added yet! Look through our database to find others!
                     </h1>
 
                 }
+                {/* {user['friends'] && user['friends'].length && user['friends'].length > 0 ?
+
+                    <FriendTable friends={user['friends']} />
+                    :
+                    <h1>
+                        No fellow readers added yet! Look through our database to find others!
+                    </h1>
+
+                } */}
+                {/* <ExampleTableComponent /> */}
                 {havePendings &&
                     <Toast vertical={'bottom'} horizontal={'end'}>
                         <Alert status="success">
