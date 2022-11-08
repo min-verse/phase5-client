@@ -10,7 +10,12 @@ import ReadingGallery from '../ReadingGallery';
 import PendingTableComponent from '../PendingTableComponent';
 import ToReadTableComponent from '../ToReadTableComponent';
 import FriendTableComponent from '../FriendTableComponent';
+import CompletedTableComponent from '../CompletedTableComponent';
 import ExampleFriendTableComponent from '../ExampleFriendTableComponent';
+import UserSearchForm from '../UserSearchForm';
+import PostTableComponent from '../PostTableComponent';
+import StatsComponent from '../StatsComponent';
+import StatsVerticalComponent from '../StatsVerticalComponent';
 
 function HomeContent() {
 
@@ -76,7 +81,8 @@ function HomeContent() {
 
                 <ReadingGallery reading={currentlyReading} />
                 <div className="problem-div">
-                    <form className="p-2" onSubmit={handleReaderSearch}>
+                    <UserSearchForm />
+                    {/* <form className="p-2" onSubmit={handleReaderSearch}>
                         <input
                             type="text"
                             name="readerSearch"
@@ -86,7 +92,7 @@ function HomeContent() {
                             className="input input-bordered input-info w-full max-w-xs"
                             placeholder="Find fellow readers to add" />
                         <button type="submit" className="btn">Search</button>
-                    </form>
+                    </form> */}
                     <FriendTableComponent friends={user['friends']} />
 
                 </div>
@@ -94,7 +100,22 @@ function HomeContent() {
             <div className="home-second-section">
                 <PendingTableComponent className="column" pendings={user['pendings']} />
                 <ToReadTableComponent className="column" readings={goingToRead} />
-                <ExampleFriendTableComponent className="column" friends={user['friends']} />
+                <CompletedTableComponent className="column" readings={completed} />
+            </div>
+            <div className="home-third-section">
+                <PostTableComponent posts={user['posts']} />
+            </div>
+            <div className="home-third-section">
+                <StatsComponent
+                    genres={user['genres']}
+                    moods={user['moods']}
+                    posts={user['posts']}
+                    comments={user['comments']} />
+                <StatsVerticalComponent
+                    genres={user['genres']}
+                    moods={user['moods']}
+                    posts={user['posts']}
+                    comments={user['comments']} />
             </div>
             {/* <ReadingGallery reading={currentlyReading} />
                 <div>

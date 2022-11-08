@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function ToReadRowComponent({ book, status }) {
+function CompletedRowComponent({ book, status }) {
 
     const {id, title, author} = book;
 
@@ -9,16 +9,16 @@ function ToReadRowComponent({ book, status }) {
         <>
             <tr>
 
-                <td className="bg-zinc-100">
+                <td>
                 {title}
                     <br />
                     <span className="badge badge-ghost badge-sm">{author}</span>
                 </td>
-                <td className="bg-zinc-100">
+                <td>
                 <button className="btn btn-ghost btn-xs bg-gray-200" disabled>{status}</button>
                 </td>
 
-                <th className="bg-zinc-100">
+                <th>
                     <Link to={`/books/${id}`} className="btn btn-ghost btn-xs bg-gray-200">Details</Link>
                 </th>
             </tr>
@@ -26,4 +26,4 @@ function ToReadRowComponent({ book, status }) {
     )
 }
 
-export default ToReadRowComponent;
+export default CompletedRowComponent;

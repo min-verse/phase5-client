@@ -34,7 +34,7 @@ function FriendTableComponent({ friends }) {
 
                             <tr>
 
-                                <td>
+                                <td className="bg-sky-50">
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle w-12 h-12">
@@ -47,13 +47,13 @@ function FriendTableComponent({ friends }) {
                                         </div>
                                     </div>
                                 </td>
-                                <td  style={{color:'gray'}}>
+                                <td  style={{color:'gray'}} className="bg-sky-50">
                                     None added
                                     <br />
                                     <span  style={{color:'gray'}} className="badge badge-ghost badge-sm" disabled>None added</span>
                                 </td>
 
-                                <th>
+                                <th className="bg-sky-50">
                                     <button  style={{color:'gray'}} className="btn btn-ghost btn-xs" disabled>details</button>
                                 </th>
                             </tr>

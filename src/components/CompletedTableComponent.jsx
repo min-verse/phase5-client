@@ -3,7 +3,7 @@ import FriendRowComponent from './FriendRowComponent';
 import PendingRowComponent from './PendingRowComponent';
 import ToReadRowComponent from '../ToReadRowComponent';
 
-function ToReadTableComponent({ readings }) {
+function CompletedTableComponent({ readings }) {
 
     return (
         <>
@@ -14,9 +14,9 @@ function ToReadTableComponent({ readings }) {
                     <thead>
 
                         <tr>
-                            <th className="text-zinc-800 bg-gray-400">To-Read Book List</th>
-                            <th className="text-zinc-800 bg-gray-400"></th>
-                            <th className="text-zinc-800 bg-gray-400"></th>
+                            <th className="text-teal-900 bg-teal-300">Completed Books List</th>
+                            <th className="text-teal-900 bg-teal-300"></th>
+                            <th className="text-teal-900 bg-teal-300"></th>
                         </tr>
                     </thead>
                     <tbody className="bg-amber-100">
@@ -34,16 +34,16 @@ function ToReadTableComponent({ readings }) {
                             :
                             <tr>
 
-                                <td className="bg-zinc-100" style={{color:'gray'}}>
-                                    No titles to read
+                                <td style={{color:'gray'}}>
+                                    No titles completed
                                     <br />
                                     <span className="badge badge-ghost badge-sm" style={{color:'gray'}}>N/A</span>
                                 </td>
-                                <td className="bg-zinc-100">
-                                    <button className="btn btn-success" style={{ marginRight: 5 }} disabled>No books read</button>
+                                <td>
+                                    <button className="btn btn-success" style={{ marginRight: 5 }} disabled>No books completed</button>
                                 </td>
 
-                                <th className="bg-zinc-100">
+                                <th>
                                     <button className="btn btn-ghost btn-xs" disabled>N/A</button>
                                 </th>
                             </tr>
@@ -56,4 +56,4 @@ function ToReadTableComponent({ readings }) {
     )
 }
 
-export default ToReadTableComponent;
+export default CompletedTableComponent;

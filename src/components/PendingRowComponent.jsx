@@ -9,7 +9,7 @@ function PendingRowComponent({ pendingData }) {
         <>
             <tr>
 
-                <td>
+                <td className="bg-orange-50">
                     <div className="flex items-center space-x-3">
                         <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
@@ -22,12 +22,12 @@ function PendingRowComponent({ pendingData }) {
                         </div>
                     </div>
                 </td>
-                <td>
+                <td className="bg-orange-50">
                     <button className="btn btn-success" style={{marginRight:5}}>Accept</button>
                     <button className="btn btn-error">Decline</button>
                 </td>
 
-                <th>
+                <th className="bg-orange-50">
                     <Link to={`/readers/${id}`} className="btn btn-ghost btn-xs bg-gray-200">See Profile</Link>
                 </th>
             </tr>

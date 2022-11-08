@@ -32,7 +32,7 @@ function PendingTableComponent({ pendings }) {
                             :
                             <tr>
 
-                                <td>
+                                <td className="bg-orange-50">
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle w-12 h-12">
@@ -45,11 +45,11 @@ function PendingTableComponent({ pendings }) {
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td className="bg-orange-50">
                                     <button className="btn btn-success" style={{ marginRight: 5 }} disabled>No Requests</button>
                                 </td>
 
-                                <th>
+                                <th className="bg-orange-50">
                                     <button className="btn btn-ghost btn-xs" disabled>N/A</button>
                                 </th>
                             </tr>

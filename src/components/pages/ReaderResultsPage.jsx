@@ -8,6 +8,7 @@ import HomeContent from '../content/HomeContent';
 import BookContent from '../content/BookContent';
 import BookResultsContent from '../content/BookResultsContent';
 import ReaderResultsContent from '../content/ReaderResultsContent';
+import UserSearchForm from '../UserSearchForm';
 
 function ReaderResultsPage() {
 
@@ -49,9 +50,7 @@ function ReaderResultsPage() {
     return (
         <>
             <NavBarUser />
-            <form>
-                
-            </form>
+            <UserSearchForm />
             <ReaderResultsContent readers={readerResults}/>
         </>
     )

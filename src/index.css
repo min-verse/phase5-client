@@ -6,8 +6,14 @@
     font-family: 'Josefin Sans', sans-serif;
 }
 
-.top-container-test{
-    display:flex;
+body {
+
+    background-image: linear-gradient(to left, #feffff, #feffff);
+
+}
+
+.top-container-test {
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
@@ -56,13 +62,13 @@
     font-size: 12px;
 }
 
-.reading-gallery-height{
-    height:800px;
+.reading-gallery-height {
+    height: 800px;
 }
 
-.example-table-height{
-    height:785px;
-    width:100%;
+.example-table-height {
+    height: 785px;
+    width: 100%;
     padding-right: 5px;
 }
 
@@ -93,14 +99,24 @@
         grid-template-columns: 1fr;
     }
 
-    .book-card-image-container {
-        
+    .book-card-image-container {}
+}
+
+@media (max-width:750px) {
+    .example-table-height {
+        width: 100vw;
     }
 }
 
-@media (max-width:750px){
-    .example-table-height{
-        width: 100vw;
+@media (max-width:1000px) {
+    .stat-component-horizontal {
+        display: none;
+    }
+}
+
+@media (min-width:1000px) {
+    .custom-stats-name-vertical {
+        display: none;
     }
 }
 
@@ -114,31 +130,33 @@
     .navbar-landing-end {
         display: none;
     }
-    .reading-gallery-height{
-        height:750px;
+
+    .reading-gallery-height {
+        height: 750px;
     }
 
-    .example-table-height{
-        height:600px;
+    .example-table-height {
+        height: 600px;
         width: 100vw;
     }
 
 }
 
 @media (max-width: 1300px) {
-    .top-container-test{
+    .top-container-test {
         flex-direction: column;
     }
 
-    
-    .reading-gallery-height{
+
+    .reading-gallery-height {
         margin-top: 20px;
         margin-bottom: 15px;
     }
 
-    .example-table-height{
-        
-        width: 100vw;
+    .example-table-height {
+
+        width: 80vw;
+        height: 500px;
     }
 }
 
@@ -286,7 +304,7 @@
     box-shadow: 10px 10px 1px #80dbff, 10px 10px 1px 2px rgba(0, 0, 0, 1);
 }
 
-.home-second-section{
+.home-second-section {
     display: flex;
     flex-wrap: wrap;
     /* width: 100%; */
@@ -294,11 +312,19 @@
     gap: 20px;
 }
 
-.column{
-    overflow-y:auto;
+.home-third-section {
+    display: flex;
+    flex-wrap: wrap;
+    /* width: 100%; */
+    justify-content: center;
+    gap: 20px;
 }
 
-.example2-table-height{
-    height:485px;
-  
+.column {
+    overflow-y: auto;
+}
+
+.example2-table-height {
+    height: 485px;
+
 }
