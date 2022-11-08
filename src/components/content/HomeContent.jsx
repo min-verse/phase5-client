@@ -94,7 +94,6 @@ function HomeContent() {
                         <button type="submit" className="btn">Search</button>
                     </form> */}
                     <FriendTableComponent friends={user['friends']} />
-
                 </div>
             </div>
             <div className="home-second-section">

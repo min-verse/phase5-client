@@ -7,9 +7,28 @@
 }
 
 body {
-
     background-image: linear-gradient(to left, #feffff, #feffff);
+}
 
+
+.sign-up-dropdown{
+    margin-top:10px;
+    display: flex;
+}
+
+.sign-up-dropdown-option{
+    margin-right:10px;
+}
+
+@media (max-width: 507px) {
+    .sign-up-dropdown {
+        flex-direction: column;
+    }
+
+    .sign-up-dropdown-option {
+        align-self: center;
+        margin-bottom: 10px;
+    }
 }
 
 .top-container-test {
@@ -100,6 +119,10 @@ body {
     font-weight: bold;
     font-family: 'Akshar', sans-serif;
     
+}
+
+.dropdown-example{
+    background-image: url(./assets/blank-profile-photo.jpeg);
 }
 
 .post-content{

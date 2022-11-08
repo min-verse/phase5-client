@@ -8,9 +8,27 @@ function SignupForm({ handleError }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [avatar, setAvatar] = useState('https://i.imgur.com/KhYI6SH.jpg');
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState('');
     const dispatch = useDispatch();
+
+    // const avatarHash = {
+    //     "Default Avatar": "https://i.imgur.com/KhYI6SH.jpg",
+    //     "Human - Azure": "https://i.imgur.com/5skGPs8.png",
+    //     "Human - Magenta": "https://i.imgur.com/44ctm99.png",
+    //     "Human - Citrus": "https://i.imgur.com/nFWDwXy.png",
+    //     "Pigeon Beanie": "https://i.imgur.com/y3PH86q.png",
+    //     "Pigeon Surf's Up": "https://i.imgur.com/bskXjBK.png",
+    //     "Pigeon Masquerade": "https://i.imgur.com/gy1tAqU.png",
+    //     "Cat - Purple": "https://i.imgur.com/Vf8YVwu.png",
+    //     "Cat - Cyan": "https://i.imgur.com/zAb8VZN.png",
+    //     "Cat - Yellow Visor": "https://i.imgur.com/Jq8NXNl.png"
+    // };
+
+    const handleSelectAvatar = (e) => {
+        setAvatar(e.target.value);
+    }
 
     function handleExampleClick(e) {
         e.preventDefault();
@@ -187,6 +205,29 @@ function SignupForm({ handleError }) {
                                             autoComplete="password"
                                             className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         />
+                                    </div>
+
+                                    <div className="col-span-6">
+                                        <label htmlFor="profile-picture" className="block text-sm font-medium text-gray-700">
+                                            Select Avatar
+                                        </label>
+                                        <div class="sign-up-dropdown">
+                                            <div className="mask mask-squircle w-12 h-12 sign-up-dropdown-option">
+                                                <img src={avatar} alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                            <select onClick={handleSelectAvatar} className="select w-full max-w-xs">
+                                                <option value="https://i.imgur.com/KhYI6SH.jpg">Default Avatar</option>
+                                                <option value="https://i.imgur.com/5skGPs8.png">Human - Azure</option>
+                                                <option value="https://i.imgur.com/44ctm99.png">Human - Magenta</option>
+                                                <option value="https://i.imgur.com/nFWDwXy.png">Human - Citrus</option>
+                                                <option value="https://i.imgur.com/y3PH86q.png">Pigeon Beanie</option>
+                                                <option value="https://i.imgur.com/bskXjBK.png">Pigeon Surf's Up</option>
+                                                <option value="https://i.imgur.com/gy1tAqU.png">Pigeon Masquerade</option>
+                                                <option value="https://i.imgur.com/Vf8YVwu.png">Cat - Purple</option>
+                                                <option value="https://i.imgur.com/zAb8VZN.png">Cat - Cyan</option>
+                                                <option value="https://i.imgur.com/Jq8NXNl.png">Cat - Yellow Visor</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                     {/* <div className="col-span-6">

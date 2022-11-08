@@ -12,6 +12,19 @@ function SignupFormNavBar({ handleError }) {
     const [errors, setErrors] = useState('');
     const dispatch = useDispatch();
 
+    const avatarHash = {
+        "Default Avatar": "https://i.imgur.com/KhYI6SH.jpg",
+        "Human - Azure": "https://i.imgur.com/5skGPs8.png",
+        "Human - Magenta": "https://i.imgur.com/44ctm99.png",
+        "Human - Citrus": "https://i.imgur.com/nFWDwXy.png",
+        "Pigeon Beanie": "https://i.imgur.com/y3PH86q.png",
+        "Pigeon Surf's Up": "https://i.imgur.com/bskXjBK.png",
+        "Pigeon Masquerade": "https://i.imgur.com/gy1tAqU.png",
+        "Cat - Purple": "https://i.imgur.com/Vf8YVwu.png",
+        "Cat - Cyan": "https://i.imgur.com/zAb8VZN.png",
+        "Cat - Yellow Visor": "https://i.imgur.com/Jq8NXNl.png"
+    };
+
     function handleExampleClick(e) {
         e.preventDefault();
         setLoading(true);
