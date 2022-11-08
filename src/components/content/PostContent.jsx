@@ -72,20 +72,22 @@ function PostContent({ postId }) {
             {currentPost &&
                 <>
 
-                    <Link to={`/books/${currentPost['book']['id']}`} className="btn"><FontAwesomeIcon style={{ color: 'white', marginRight: 8 }} icon={faChevronLeft} /> Back to {currentPost['book']['title']}</Link>
+                    <Link to={`/books/${currentPost['book']['id']}`} className="btn" style={{margin:20}}><FontAwesomeIcon style={{ color: 'white', marginRight: 8 }} icon={faChevronLeft} /> Back to {currentPost['book']['title']}</Link>
                     {error && error.length && error.length > 0 ? 
                     <ErrorAlert />
                     :
                     null}
-                    <h1 style={{
+                    {/* <h1 style={{
                         fontSize: 30,
                         fontStyle: 'italic',
                         paddingLeft: 50
-                    }}>{postId}</h1>
+                    }}>{postId}</h1> */}
                     <div className="post-card-container">
-                        {currentPost && <div>
-                            <h1>{currentPost['title']}</h1>
-                            <p>{currentPost['content']}</p>
+                        {currentPost && <div style={{padding:20}}>
+                            <h1 className="post-title">{currentPost['title']}</h1>
+                            <small><em>written by:</em> {postAuthor['username']}</small>
+                            <p className="post-content">{currentPost['content']}</p>
+                            <small>on <em>{currentPost['created_at']}</em></small>
                         </div>}
                     </div>
                     <CommentForm handleError={handleError} post={currentPost}  handleNewComment={handleNewComment}/>

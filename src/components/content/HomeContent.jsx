@@ -49,7 +49,7 @@ function HomeContent() {
         if (user['pendings'] && user['pendings'].length && user['pendings'].length > 0) {
             setHavePendings(true);
         }
-    }, [user, user['readings']]);
+    }, [user]);
 
     const toggleVisible = () => {
         setVisible(!visible)

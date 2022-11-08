@@ -48,14 +48,20 @@ function CommentForm({ post, handleError, handleNewComment }) {
 
     return (
         <>
-            <form onSubmit={submitComment}>
+            <form onSubmit={submitComment} style={{margin:30, display:'flex', justifyContent:'flex-end', alignItems:'center', flexDirection:'column'}}>
                 <textarea
                     name="commentContent"
                     value={commentContent}
                     onChange={handleCommentChange}
                     className="textarea textarea-info"
-                    placeholder={`Add a comment to ${username}'s post`}></textarea>
-                <button type="submit" className="btn">Add Comment</button>
+                    placeholder={`Add a comment to ${username}'s post`}
+                    style={{
+                        display:'block',
+                        marginTop:10,
+                        marginBottom:10,
+                        width:'80%'
+                    }}></textarea>
+                <button type="submit" className="btn" style={{alignItems:'right'}}>Add Comment</button>
             </form>
         </>
     );

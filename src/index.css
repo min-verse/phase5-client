@@ -94,6 +94,20 @@ body {
     font-size: large;
 }
 
+.post-title {
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bold;
+    font-family: 'Akshar', sans-serif;
+    
+}
+
+.post-content{
+    margin: 10px auto;
+    
+    font-family: 'Cabin', sans-serif;
+}
+
 @media (max-width: 950px) {
     .book-top-container {
         grid-template-columns: 1fr;
@@ -142,6 +156,17 @@ body {
 
 }
 
+.reader-result-username{
+    font-size: 50px;
+    font-family: 'Cabin', sans-serif;
+}
+
+.reader-result-buttons{
+    margin-left:10px;
+    margin-right:10px;
+    margin-bottom:10px;
+}
+
 @media (max-width: 1300px) {
     .top-container-test {
         flex-direction: column;
@@ -168,7 +193,26 @@ body {
     margin-bottom: 12px;
 }
 
+.book-result-card {
+    border-spacing: 0;
+    background-color: white;
+    display: flex;
+    margin: 50px 50px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border: 2px solid;
+    box-shadow: 10px 10px 1px #80dbff, 10px 10px 1px 2px rgba(0, 0, 0, 1);
+}
 
+.book-result-image{
+    padding:20px;
+    border-radius: 5px;
+}
+
+.book-result-sneak-peek{
+    
+}
 
 .book-card {
     border-spacing: 0;
@@ -296,7 +340,7 @@ body {
     background-color: white;
     padding: 12px;
     display: flex;
-    margin: 5px 20px;
+    margin: 20px 20px;
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;

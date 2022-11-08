@@ -65,6 +65,9 @@ export const userSlice = createSlice({
         },
         setOutoingsUpdate: (state, action) => {
             state.outgoings = [...action.payload]
+        },
+        setFriendsUpdate: (state, action)=>{
+            state.friends = [...action.payload];
         }
     },
 });
@@ -81,6 +84,7 @@ export const { setUser,
     setReadingsUpdate,
     setPendingsUpdate,
     setOutgoings,
-    setOutoingsUpdate } = userSlice.actions;
+    setOutoingsUpdate,
+    setFriendsUpdate } = userSlice.actions;
 
 export default userSlice.reducer;

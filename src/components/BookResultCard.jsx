@@ -54,23 +54,23 @@ function BookResultCard({ book }) {
     };
 
     return (
-        <div>
-            <div>
-                <img src={cover} />
+        <div className="book-result-card">
+            <div className="book-result-image">
+                <img src={cover} style={{objectFit:'cover'}}/>
             </div>
             <div>
             {error && error.length && error.length > 0 ?
                         <ErrorAlert errors={error} />
                         :
                         null}
-                <h1>{title}</h1>
-                <h3>Sneak Peek:</h3>
+                <h1 className="book-title">{title}</h1>
+                <h3 style={{marginLeft:12}}>Sneak Peek:</h3>
                 {description && description.length && description.length > 150 ?
-                <p>{description.slice(0,150)+"..."}</p>
+                <p className="book-summary">{description.slice(0,150)+"..."}</p>
                 :
-                <p>{description}</p>
+                <p className="book-summary">{description}</p>
                 }
-                <p>genre(s): {genres.map((genre, index) => {
+                <p style={{marginLeft:12}}>genre(s): {genres.map((genre, index) => {
                     if (index !== genres.length - 1) {
                         return (
                             <span key={index} className="genre-style">{genre}, </span>
@@ -81,7 +81,7 @@ function BookResultCard({ book }) {
                         );
                     }
                 })}</p>
-                <p>mood(s): {moods.map((mood, index) => {
+                <p style={{marginLeft:12}}>mood(s): {moods.map((mood, index) => {
                     if (index !== moods.length - 1) {
                         return (
                             <span key={index} className="mood-style">{mood}, </span>
@@ -93,8 +93,8 @@ function BookResultCard({ book }) {
                     }
 
                 })}</p>
-                <div>
-                    <Link className="btn" to={`/books/${id}`}>See More</Link>
+                <div style={{marginTop:10, marginBottom:10}}>
+                    <Link className="btn" to={`/books/${id}`} style={{marginRight:10, marginBottom:10}}>See More</Link>
                     {inLibrary ?
                         <button className="btn" disabled>Already Tracking</button>
                         :

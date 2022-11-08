@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import FriendRowComponent from './FriendRowComponent';
 import PendingRowComponent from './PendingRowComponent';
+import ErrorAlert from './ErrorAlert';
 
 function PendingTableComponent({ pendings }) {
+
+    const [error, setError] = useState('');
+    const handleError = (obj)=>{
+        setError(obj);
+    };
 
     return (
         <>
             <div className="example2-table-height overflow-x-auto overflow-y-auto">
-
+                {error && error.length && error.length > 0 ?
+                    <ErrorAlert id="auto-hide-message" errors={error} />
+                    :
+                    null}
                 <table className="table w-full">
 
                     <thead>
@@ -26,6 +35,7 @@ function PendingTableComponent({ pendings }) {
                                     <PendingRowComponent
                                         key={pending['friend']['id']}
                                         pendingData={pending['friend']}
+                                        handleError={handleError}
                                     />
                                 )
                             })
@@ -40,7 +50,7 @@ function PendingTableComponent({ pendings }) {
                                             </div>
                                         </div>
                                         <div>
-                                            <div className="font-bold" style={{color:'gray'}}>No Requests</div>
+                                            <div className="font-bold" style={{ color: 'gray' }}>No Requests</div>
 
                                         </div>
                                     </div>
