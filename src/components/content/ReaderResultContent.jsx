@@ -26,6 +26,7 @@ function ReaderResultContent({ reader, status }) {
     const [readerSearch, setReaderSearch] = useState('');
     const [havePendings, setHavePendings] = useState(false);
     const user = useSelector((state) => state.user);
+    console.log(reader);
     const { id, readings, to_reads, completed, friends, genres, moods, posts } = reader;
     const navigate = useNavigate();
     console.log(user);

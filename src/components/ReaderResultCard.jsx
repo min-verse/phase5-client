@@ -12,6 +12,7 @@ function ReaderResultCard({ reader }) {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const { id, username, readings } = reader;
+    console.log(reader);
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
 

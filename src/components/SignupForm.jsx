@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { setUser, clearUser, setReadings, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
 
 function SignupForm({ handleError }) {
@@ -12,6 +13,11 @@ function SignupForm({ handleError }) {
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const goToUserHome = ()=>{
+        navigate("/home");
+    }
 
     // const avatarHash = {
     //     "Default Avatar": "https://i.imgur.com/KhYI6SH.jpg",
@@ -91,17 +97,31 @@ function SignupForm({ handleError }) {
                         username: username,
                         email: email,
                         password: password,
+                        avatar:avatar
                     }
                 }),
             })
-                .then(res => res.json())
+                .then(res => {
+                    if (res.ok) {
+                        console.log(res.headers.get("Authorization"));
+                        localStorage.setItem("token", res.headers.get("Authorization"));
+                        return res.json();
+                    } else {
+                        return res.text().then((text) => Promise.reject(text));
+                    }
+                })
                 .then((data) => {
                     setLoading(false);
                     if (!data['status']['code']) {
                         handleError(data['status']['message']);
                     } else {
                         dispatch(setUser(data['data']));
+                        goToUserHome();
                     }
+                })
+                .catch((err)=>{
+                    setLoading(false);
+                    handleError(err);
                 });
         }
     }

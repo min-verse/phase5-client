@@ -54,7 +54,7 @@ function NavBarLanding() {
                     <Button onClick={toggleLoginVisible}>Log In</Button>
                     
                 </Navbar.End>
-                <SignupModalNavBar open={registerVisible} toggle={toggleRegisterVisible} />
+                <SignupModal open={registerVisible} toggle={toggleRegisterVisible} />
                 <LoginModal open={loginVisible} toggle={toggleLoginVisible} />
             </Navbar>
         </div>
