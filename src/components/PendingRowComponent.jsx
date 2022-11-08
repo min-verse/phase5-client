@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function PendingRowComponent({ pendingData, handleError }) {
 
-    const { id, username } = pendingData;
+    const { id, avatar, username } = pendingData;
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
@@ -79,7 +79,7 @@ function PendingRowComponent({ pendingData, handleError }) {
                     <div className="flex items-center space-x-3">
                         <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
-                                <img src="src/assets/blank-profile-photo.jpeg" alt="Avatar Tailwind CSS Component" />
+                                <img src={avatar ? avatar : "https://i.imgur.com/KhYI6SH.jpg"} alt="Avatar Tailwind CSS Component" />
                             </div>
                         </div>
                         <div>

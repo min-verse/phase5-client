@@ -6,7 +6,7 @@ function FriendRowComponent({ friendData }) {
 
     const { friend, current_book } = friendData;
 
-    const { id, username } = friend;
+    const { id, avatar, username } = friend;
     const user = useSelector((state)=>state.user);
 
     return (
@@ -17,7 +17,7 @@ function FriendRowComponent({ friendData }) {
                     <div className="flex bg-sky-50 items-center space-x-3">
                         <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
-                                <img src="src/assets/blank-profile-photo.jpeg" alt="Avatar Tailwind CSS Component" />
+                                <img src={avatar ? avatar : "https://i.imgur.com/KhYI6SH.jpg"} alt="Avatar Tailwind CSS Component" />
                             </div>
                         </div>
                         <div>

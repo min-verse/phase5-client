@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { setUser, clearUser, setReadings, setPendingsUpdate, setReadingsUpdate, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
+import { setUser, clearUser, setReadings, setPendingsUpdate, setOutgoingsUpdate, setReadingsUpdate, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from './state/user';
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorAlert from './ErrorAlert';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ function ReaderResultCard({ reader }) {
     const [inOutgoing, setInOutgoing] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { id, username, readings } = reader;
+    const { id, username, avatar, readings } = reader;
     console.log(reader);
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -49,7 +49,7 @@ function ReaderResultCard({ reader }) {
                     .then((data) => {
                         setError('');
                         setLoading(false);
-                        setPendingsUpdate(data);
+                        dispatch(setOutgoingsUpdate(data));
                         console.log(data);
                         setInPending(true);
                     });
@@ -63,14 +63,18 @@ function ReaderResultCard({ reader }) {
 
     return (
         <div>
-            {/* <div>
-                <img src={cover} />
-            </div> */}
-            <div>
+            <div className="reader-result-card-container">
                 {error && error.length && error.length > 0 ?
                     <ErrorAlert errors={error} />
                     :
                     null}
+                <div className="reader-result-avatar">
+                    <div className="mask mask-squircle w-16 h-16">
+                        <img src={avatar ? avatar : "https://i.imgur.com/KhYI6SH.jpg"} alt="Avatar Tailwind CSS Component" />
+                    </div>
+                </div>
+                <div style={{display:'flex', flexDirection:'column'}}>
+                <div>
                 <h1>{username}</h1>
                 <h3>Their Recent Reads:</h3>
                 {readings && readings.length ?
@@ -101,22 +105,24 @@ function ReaderResultCard({ reader }) {
                     :
                     <p>This reader hasn't added any books yet</p>
                 }
+                </div>
                 <div>
-                    <Link className="btn" to={`/readers/${id}`}>See Profile</Link>
+                    <Link className="btn reader-result-card-button" to={`/readers/${id}`}>See Profile</Link>
                     {inFriends ?
-                        <button className="btn" disabled>Already Friends</button>
+                        <button className="btn reader-result-card-button" disabled>Already Friends</button>
                         :
                         inPending ?
-                            <button className="btn" disabled>In Your Pending</button>
+                            <button className="btn reader-result-card-button" disabled>In Your Pending</button>
                             :
                             inOutgoing ?
-                                <button className="btn" disabled>Already Requested</button>
+                                <button className="btn reader-result-card-button" disabled>Already Requested</button>
                                 :
                                 loading ?
-                                    <button className="btn" disabled>Sending Request...</button>
+                                    <button className="btn reader-result-card-button" disabled>Sending Request...</button>
                                     :
-                                    <button className="btn" onClick={handleSendRequest}>Send Friend Request</button>
+                                    <button className="btn reader-result-card-button" onClick={handleSendRequest}>Send Friend Request</button>
                     }
+                </div>
                 </div>
             </div>
         </div>

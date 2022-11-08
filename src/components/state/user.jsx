@@ -18,7 +18,8 @@ export const userSlice = createSlice({
             state.profile = {
                 id: action.payload.id,
                 email: action.payload.email,
-                username: action.payload.username
+                username: action.payload.username,
+                avatar:action.payload.avatar
             };
             state.isAuthenticated = true;
         },
@@ -63,7 +64,7 @@ export const userSlice = createSlice({
         setOutgoings: (state, action) => {
             state.outgoings = [...action.payload.outgoings]
         },
-        setOutoingsUpdate: (state, action) => {
+        setOutgoingsUpdate: (state, action) => {
             state.outgoings = [...action.payload]
         },
         setFriendsUpdate: (state, action)=>{
@@ -84,7 +85,7 @@ export const { setUser,
     setReadingsUpdate,
     setPendingsUpdate,
     setOutgoings,
-    setOutoingsUpdate,
+    setOutgoingsUpdate,
     setFriendsUpdate } = userSlice.actions;
 
 export default userSlice.reducer;

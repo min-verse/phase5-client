@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import SignupModal from '../SignupModal';
 import { Link, useNavigate } from 'react-router-dom';
 import { Hero, Button, Toast, Artboard } from 'react-daisyui';
+import { setUser, clearUser, setReadings, setPendingsUpdate, setOutgoingsUpdate, setReadingsUpdate, setFriends, setPosts, setComments, setPendings, setGenres, setMoods } from '../state/user';
 import Typewriter from 'typewriter-effect';
+import ErrorAlert from '../ErrorAlert';
 import { useSelector, useDispatch } from 'react-redux';
 import ReadingCard from '../ReadingCard';
 import BookCard from '../BookCard';
@@ -12,10 +14,15 @@ import ReaderResultContent from './ReaderResultContent';
 function ReaderContent({ readerId }) {
 
     const [currentReader, setCurrentReader] = useState();
+    const [error, setError] = useState('');
     const [friendStatus, setFriendStatus] = useState();
+    const [loading, setLoading] = useState(false);
     const [sentRequest, setSentRequest] = useState(false);
     const [comments, setComments] = useState([]);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user);
+    console.log(readerId);
 
     function goToUserHome() {
         navigate("/home");
@@ -23,7 +30,7 @@ function ReaderContent({ readerId }) {
 
     useEffect(() => {
         console.log('evoked');
-        const getPost = async () => {
+        const getReader = async () => {
             let token = localStorage.getItem("token");
             if (token) {
                 await fetch(`http://localhost:5000/reader_page`, {
@@ -55,12 +62,44 @@ function ReaderContent({ readerId }) {
                 alert("Not logged in.");
             }
         };
-        getPost();
-    }, []);
+        getReader();
+    }, [user]);
 
     const handlePostSubmit = (e) => {
         e.preventDefault();
         console.log("I'm submitted!")
+    };
+
+    const handleSendRequest = async () => {
+        try {
+            setLoading(true);
+            let token = localStorage.getItem("token");
+            if (token) {
+                await fetch(`http://localhost:5000/friendships`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
+                    body: JSON.stringify({
+                        id: readerId
+                    })
+                }).then(res => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        setError('');
+                        setLoading(false);
+                        dispatch(setOutgoingsUpdate(data));
+                        console.log(data);
+                        setFriendStatus("pending");
+                    });
+            } else {
+                alert("You are not logged in.");
+            }
+        } catch (error) {
+            setLoading(false);
+            setError(error);
+        }
     };
 
     return (
@@ -68,7 +107,16 @@ function ReaderContent({ readerId }) {
             {currentReader &&
                 <>
                     <div style={{ margin: 20 }}>
-                        <h1 className="reader-result-username">{currentReader['username']}</h1>
+                        <div className="reader-page-header">
+                            {error && error.length && error.length > 0 ?
+                                <ErrorAlert errors={error} />
+                                :
+                                null}
+                            <div className="mask mask-squircle w-16 h-16">
+                                <img src={currentReader['avatar'] ? currentReader['avatar'] : "https://i.imgur.com/KhYI6SH.jpg"} alt="Avatar Tailwind CSS Component" />
+                            </div>
+                            <h1 className="reader-result-username">{currentReader['username']}</h1>
+                        </div>
                         <div>
                             {friendStatus !== "not friends" ?
                                 <>
@@ -79,13 +127,13 @@ function ReaderContent({ readerId }) {
                                             <button className="btn btn-error reader-result-buttons">Remove Friend</button>
                                         </>
                                         :
-                                        <button className="btn" disabeled>Pending</button>}
+                                        <button className="btn" disabled>Pending</button>}
                                 </>
                                 :
                                 sentRequest ?
-                                    <button className="btn btn-success">Send Friend Request</button>
-                                    :
                                     <button className="btn" disabled>Sent Request</button>
+                                    :
+                                    <button className="btn btn-success" onClick={handleSendRequest}>Send Friend Request</button>
                             }
                         </div>
                     </div>
