@@ -124,18 +124,36 @@ function NavBarUser() {
                             name="search"
                             bordered
                             type="text"
+                            style={{marginBottom:5, marginRight:10}}
                             placeholder="Search Books" />
                     </Form>
-                    {loading ?
-                        <Button className="ml-4" disabled>Logging Out... 
-                        <span className="animate-spin"><FontAwesomeIcon style={{color:'white', marginLeft:8}} icon={faSpinner} /></span>
+                    <Dropdown vertical="end">
+                        <Button color="ghost" className="avatar" shape="circle">
+                            <div className="mask mask-squircle w-12 h-12">
+                                <img src={user['profile']['avatar'] ? user['profile']['avatar'] : "https://i.imgur.com/KhYI6SH.jpg"} alt="Avatar Tailwind CSS Component" />
+                            </div>
+                        </Button>
+                        <Dropdown.Menu className="w-52 menu-compact">
+
+                            <Dropdown.Item>{loading ?
+                                <Button className="ml-4" disabled>Logging Out...
+                                    <span className="animate-spin"><FontAwesomeIcon style={{ color: 'white', marginLeft: 8 }} icon={faSpinner} /></span>
+                                </Button>
+                                :
+                                <Button className="ml-4" onClick={handleLogOut}>Log Out</Button>
+                            }</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    {/* {loading ?
+                        <Button className="ml-4" disabled>Logging Out...
+                            <span className="animate-spin"><FontAwesomeIcon style={{ color: 'white', marginLeft: 8 }} icon={faSpinner} /></span>
                         </Button>
                         :
                         <Button className="ml-4" onClick={handleLogOut}>Log Out</Button>
-                    }
+                    } */}
                 </Navbar.End>
             </Navbar>
-        </div>
+        </div >
     )
 }
 
